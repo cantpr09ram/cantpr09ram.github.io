@@ -5,9 +5,9 @@ export const SITE: Site = {
   author: "Cantpr09ram",
   desc: "A place where I write something not important.",
   title: "Cantpr09ram's blog",
-  ogImage: "astropaper-og.jpg",
+  ogImage: "og-image.png",
   lightAndDarkMode: true,
-  postPerPage: 3,
+  postPerPage: 10,
   scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
 };
 
