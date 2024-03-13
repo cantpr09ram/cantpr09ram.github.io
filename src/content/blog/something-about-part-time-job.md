@@ -1,7 +1,6 @@
 ---
 author: Me
 pubDatetime: 2023-07-12T22:25:03.284Z
-modDatetime: 2023-07-12T22:25:03.284Z
 title: 第一次程式工讀經驗
 slug: something-about-part-time-job
 featured: true
