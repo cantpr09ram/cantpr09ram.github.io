@@ -51,7 +51,7 @@ canonicalURL: https://example.org/my-article-was-already-posted-here
 接著我在網路上找到[這個](https://github.com/timlrx/tailwind-nextjs-starter-blog)，用[next.js](https://nextjs.org/) 開發的，加上[Vercel](https://vercel.com) 簡直潮到出水，實作後才發現這個專案預設是用[Vercel](https://vercel.com) deploy 的，反正就是跟 Github Action 有仇一樣永遠跑不出來，所以最後還是放棄這個方案的(問題應該出在[ Contentlayer ](https://contentlayer.dev/)上面，還有我菜)，而為什麼我堅持用 Github Pages 主要因為我希望網址不要改變(結果還是改了一些)<br>
 ![astro](@assets/images/new-blog/astro.png)
 最後找到 [astro](https://astro.build/) 。反正 [astro](https://astro.build/)完美符合我前面設定的條件，而且跟 Github Pages 的兼容性明顯好很多，而且這個
-[模板] (https://github.com/satnaing/astro-paper) 基本上處於非常能用的階段，所以我就直接用[這個模板] (https://github.com/satnaing/astro-paper)了。
+[模板](https://github.com/satnaing/astro-paper) 基本上處於非常能用的階段，所以我就直接用[這個模板](https://github.com/satnaing/astro-paper)了。
 
 ## 總結
 
