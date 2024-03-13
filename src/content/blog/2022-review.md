@@ -6,7 +6,8 @@ slug: 2022-review
 featured: true
 draft: false
 tags:
-  - docs
+  - life
+  - review
 description: "2022 Review"
 ---
 

@@ -5,7 +5,8 @@ slug: 2023-review
 featured: true
 draft: false
 tags:
-  - docs
+  - life
+  - review
 description: 我也不知道我在幹嘛的一年
 ---
 
