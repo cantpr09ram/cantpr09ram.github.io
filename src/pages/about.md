@@ -5,4 +5,4 @@ title: "AboutMe"
 
 ## Who am I?
 
-Hello 👋 I am a university student who lives, study and works in taipei. learning how to build some useful things and beautidul.
+Hello 👋 I am a university student majoring in electrical engineering and also a front-end intern engineer, with some experience in front-end, back-end, and iOS development. I enjoy running, fitness, and occasionally printing. I am passionate about learning how to build something useful and beautiful.
