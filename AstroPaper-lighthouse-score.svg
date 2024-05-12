@@ -15,7 +15,7 @@
 
 			.guage-text {
 				font-size: 40px;
-				font-family: monospace;
+				font-family: Roboto;
 				text-align: center
 			}
 

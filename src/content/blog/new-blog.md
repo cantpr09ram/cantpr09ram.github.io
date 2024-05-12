@@ -11,7 +11,7 @@ tags:
   - think
 ogImage: "@assets/images/new-blog/new-blog-og.png"
 description: Why Do I Need a New Blog and the Process of Creating a New Blog
-canonicalURL: https://example.org/my-article-was-already-posted-here
+canonicalURL: https://cantpr09ram.github.io/posts/my-new-blog/
 ---
 
 ![og](@assets/images/new-blog/new-blog-og.png)
