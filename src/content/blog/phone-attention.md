@@ -4,7 +4,7 @@ author: Me
 pubDatetime: 2024-06-18T02:06:36.337Z
 slug: phone-attention
 featured: true
-draft: false
+draft: true
 tags:
   - life
   - think
