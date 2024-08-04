@@ -3,7 +3,7 @@ title: My new blog
 author: Me
 pubDatetime: 2024-03-13T07:55:15.614Z
 slug: my-new-blog
-featured: true
+featured: false
 draft: false
 tags:
   - code
