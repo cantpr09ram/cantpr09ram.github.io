@@ -1,0 +1,153 @@
+---
+const totalContributions: number = 0;
+---
+
+<section>
+  <h3 class="" id="total-contributions">0</h3>
+  <div class="flex flex-col items-center justify-center pt-3">
+    <div id="contributions" class="flex gap-2">
+      {
+        Array.apply(null, Array(53)).map((week, i) => {
+          return (
+            <div
+              id={`week-${i}`}
+              class={`flex-col gap-1 ${i < 20 ? "hidden md:flex" : "flex"}`}
+            >
+              {Array.apply(null, Array(7)).map((day, j) => {
+                return (
+                  <div
+                    id={`week-${i}-day-${j}`}
+                    class="h-3 w-3 lg:h-7 lg:w-7"
+                    style="background-color: rgba(235,237,240,0.15);"
+                  />
+                );
+              })}
+            </div>
+          );
+        })
+      }
+    </div>
+    <p class="my-1 hidden" id="contribution-error">
+      Ooops, error fetching from GitHub.
+    </p>
+  </div>
+</section>
+<script>
+  /**
+   * Types for our data
+   */
+  type ContributionDay = {
+    color: string;
+    contributionCount: number;
+    date: string;
+    weekday: number;
+  };
+
+  type Week = {
+    contributionDays: ContributionDay[];
+    firstDay: string;
+  };
+
+  type Weeks = Week[];
+
+  type GraphQLRes = {
+    user: {
+      contributionsCollection: {
+        contributionCalendar: {
+          totalContributions: number;
+          weeks: Weeks;
+        };
+      };
+    };
+  };
+
+  async function getContributions(token: string, username: string) {
+    const headers = {
+      Authorization: `bearer ${token}`,
+    };
+    const body = {
+      query: `query {
+                user(login: "${username}") {
+                  name
+                  contributionsCollection {
+                    contributionCalendar {
+                      colors
+                      totalContributions
+                      weeks {
+                        contributionDays {
+                          color
+                          contributionCount
+                          date
+                          weekday
+                        }
+                        firstDay
+                      }
+                    }
+                  }
+                }
+              }`,
+    };
+    const response = await fetch("https://api.github.com/graphql", {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: headers,
+    });
+    const data = await response.json();
+    return data;
+  }
+
+  const { data } = await getContributions(
+    import.meta.env.PUBLIC_GITHUB_TOKEN,
+    import.meta.env.PUBLIC_GITHUB_USERNAME
+  );
+
+  console.log(
+    "data",
+    data.user.contributionsCollection.contributionCalendar.totalContributions
+  );
+
+  /**
+   * If there's an error with the fetch or the user doesn't exist, show error text
+   */
+  if (!data || !data.user) {
+    const oops = document.getElementById("contribution-error");
+    oops?.classList.remove("hidden");
+    throw "Error fetching from Github";
+  }
+
+  /**
+   * Drill down to data from fetch request
+   */
+  const {
+    user: {
+      contributionsCollection: {
+        contributionCalendar: { weeks, totalContributions },
+      },
+    },
+  }: GraphQLRes = data;
+
+  const totalContributionsElement = document.getElementById(
+    "total-contributions"
+  );
+  if (totalContributionsElement) {
+    totalContributionsElement.textContent =
+      "This year's public commit : " + totalContributions.toString();
+  }
+
+  /**
+   * Loop through the weeks + add them to the parent div
+   */
+  weeks.forEach(({ contributionDays }, i) => {
+    // Loop through each week's days + add them to their week
+    contributionDays.forEach(({ color, date, contributionCount }, j) => {
+      const bgColor = color === "#ebedf0" ? "rgba(235,	237,	240, 0.15)" : color; // Make white squares a more pleasing gray
+      // Get + update each day square
+      const dayDiv = document.getElementById(`week-${i}-day-${j}`);
+      dayDiv?.setAttribute("style", `background-color: ${bgColor}`);
+      dayDiv?.setAttribute(
+        "title",
+        `${date} - ${contributionCount} public commits`
+      );
+    });
+  });
+</script>

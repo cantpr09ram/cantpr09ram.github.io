@@ -8,7 +8,6 @@ draft: true
 tags:
   - life
   - think
-ogImage: "@assets/images/2024-VVDC/2024vvdc-og.png"
 description: 為什麼需要減少無意義的上網
 canonicalURL: https://cantpr09ram.github.io/posts/phone-attention
 ---

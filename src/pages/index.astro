@@ -9,6 +9,7 @@ import Card from "@components/Card";
 import Socials from "@components/Socials.astro";
 import getSortedPosts from "@utils/getSortedPosts";
 import { SOCIALS } from "@config";
+import Github from "@components/Github.astro";
 
 const posts = await getCollection("blog");
 
@@ -32,18 +33,9 @@ const socialCount = SOCIALS.filter(social => social.active).length;
         occasionally printing. I am passionate about learning how to build
         something useful and beautiful.
       </p>
-      {
-        // only display if at least one social link is enabled
-        socialCount > 0 && (
-          <div class="social-wrapper">
-            <div class="social-links">Social Links:</div>
-            <Socials />
-          </div>
-        )
-      }
     </section>
 
-    <Hr />
+    <Github />
 
     {
       recentPosts.length > 0 && (
