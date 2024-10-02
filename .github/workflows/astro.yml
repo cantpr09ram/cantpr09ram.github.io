@@ -58,7 +58,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install
         working-directory: ${{ env.BUILD_PATH }}
-
+      - name: 'Create env file'
+        run: |
+          touch .env
+          echo PUBLIC_GITHUB_TOKEN=${{ secrets.PUBLIC_GITHUB_TOKEN }} >> .env
+          echo PUBLIC_GITHUB_USERNAME=${{ secrets.PUBLIC_GITHUB_USERNAME }} >> .env
+          cat .env
+          
       - name: Build with Astro
         run: |
           pnpm astro build \
