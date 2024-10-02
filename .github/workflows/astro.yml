@@ -62,7 +62,7 @@ jobs:
         run: |
           touch .env
           echo PUBLIC_GITHUB_TOKEN=${{ secrets.PUBLIC_GITHUB_TOKEN }} >> .env
-          echo PUBLIC_GITHUB_USERNAME=${{ secrets.PUBLIC_GITHUB_USERNAME }} >> .env
+          echo PUBLIC_GITHUB_TOKEN=${{ secrets.PUBLIC_GITHUB_TOKEN }} >> .env
           cat .env
           
       - name: Build with Astro
