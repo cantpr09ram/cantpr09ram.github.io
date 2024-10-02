@@ -58,6 +58,13 @@ jobs:
           node-version: "20"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
           cache-dependency-path: ${{ env.BUILD_PATH }}/package-lock.json
+      - name: Create env file
+      run: |
+        touch .env
+        echo PUBLIC_GITHUB_TOKEN=${secrets.PUBLIC_GITHUB_TOKEN} >> .env
+        echo PUBLIC_GITHUB_USERNAME=${secrets.PUBLIC_GITHUB_USERNAME} >> .env
+        cat .env
+    env: 
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
