@@ -61,11 +61,13 @@ jobs:
       - name: 'Create env file'
         run: |
           touch .env
-          echo  ${{ secrets.PUBLIC_GITHUB_TOKEN }}
+          echo  secrets.PUBLIC_GITHUB_TOKEN
           echo PUBLIC_GITHUB_TOKEN=${{ secrets.PUBLIC_GITHUB_TOKEN }} >> .env
-          echo PUBLIC_GITHUB_TOKEN=${{ secrets.PUBLIC_GITHUB_TOKEN }} >> .env
+          echo PUBLIC_GITHUB_USERNAME=${{ secrets.PUBLIC_GITHUB_USErNAME }} >> .env
           cat .env
-          
+        env: # Or as an environment variable
+          PUBLIC_GITHUB_TOKEN: ${{ secrets.PUBLIC_GITHUB_TOKEN }}
+          PUBLIC_GITHUB_USERNAME: ${{ secrets.PUBLIC_GITHUB_USERNAME }}
       - name: Build with Astro
         run: |
           pnpm astro build \
