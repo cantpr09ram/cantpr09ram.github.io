@@ -68,12 +68,17 @@ jobs:
         env: # Or as an environment variable
           PUBLIC_GITHUB_TOKEN: ${{ secrets.PUBLIC_GITHUB_TOKEN }}
           PUBLIC_GITHUB_USERNAME: ${{ secrets.PUBLIC_GITHUB_USERNAME }}
+          
       - name: Build with Astro
         run: |
           pnpm astro build \
             --site "${{ steps.pages.outputs.origin }}" \
             --base "${{ steps.pages.outputs.base_path }}"
         working-directory: ${{ env.BUILD_PATH }}
+        
+        env: 
+          PUBLIC_GITHUB_TOKEN: ${{ secrets.PUBLIC_GITHUB_TOKEN }}
+          PUBLIC_GITHUB_USERNAME: ${{ secrets.PUBLIC_GITHUB_USERNAME }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
