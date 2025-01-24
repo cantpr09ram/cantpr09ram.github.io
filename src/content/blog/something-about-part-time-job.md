@@ -8,6 +8,7 @@ draft: false
 tags:
   - code
   - work
+ogImage: "@assets/images/og-image.png"
 description: 第一次跟開發有關的打工的經驗
 ---
 
