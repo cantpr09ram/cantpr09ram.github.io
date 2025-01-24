@@ -137,7 +137,7 @@ canonicalURL: https://cantpr09ram.github.io/posts/2024-review
 
 #### 26. 今年你最大的音樂發現是什麼？
 
-以前我不會聽古典音樂。有一天我突然心血來潮查了幾個家喻戶曉的音樂家，想滿足自己的好奇心，沒想到 [Le quattro stagioni](https://open.spotify.com/track/5UhUPAAe5go73NTkSoJ9bP) 最後會排在今年第六名。
+以前我不會聽古典音樂。有一天我突然心血來潮查了幾個家喻戶曉的音樂家，想滿足自己的好奇心，沒想到 [The four seasons concerto no. 4 in f minor rv 297 winter i. allegro non molto](https://open.spotify.com/track/0ROMalDdNg3L2HoZP4qFyJ) 最後會排在今年第六名。
 
 #### 27. 你最喜歡的電影是哪部？
 
