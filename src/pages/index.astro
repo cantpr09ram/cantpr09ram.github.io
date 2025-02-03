@@ -1,90 +1,29 @@
 ---
-import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
-import LinkButton from "@components/LinkButton.astro";
-import Hr from "@components/Hr.astro";
-import Card from "@components/Card";
+import TypewriterEffect from "@components/Typing.tsx";
 import Socials from "@components/Socials.astro";
-import getSortedPosts from "@utils/getSortedPosts";
-import { SOCIALS } from "@config";
-import Github from "@components/Github.astro";
-
-const posts = await getCollection("blog");
-
-const sortedPosts = getSortedPosts(posts);
-const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
-const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
-
-const socialCount = SOCIALS.filter(social => social.active).length;
 ---
 
 <Layout>
   <Header />
   <main id="main-content">
     <section id="hero">
-      <h1>Cantpr09ram's Blog</h1>
-
+      <TypewriterEffect
+        text="你好! Hello! Bonjour! こんにちは!"
+        speed={100}
+        client:load
+      />
       <p>
-        Hello 👋 I am a university student majoring in electrical engineering
-        and also a front-end intern engineer, with some experience in front-end,
+        👋 I am a university student majoring in electrical engineering and also
+        a front-end intern engineer, with some experience in front-end,
         back-end, and iOS development. I enjoy running, fitness, and
         occasionally printing. I am passionate about learning how to build
         something useful and beautiful.
       </p>
+      <Socials />
     </section>
-
-    {
-      recentPosts.length > 0 && (
-        <section id="recent-posts">
-          <h2>Recent Posts</h2>
-          <ul>
-            {recentPosts.map(
-              ({ data, slug }, index) =>
-                index < 4 && (
-                  <Card
-                    href={`/posts/${slug}/`}
-                    frontmatter={data}
-                    secHeading={false}
-                  />
-                )
-            )}
-          </ul>
-        </section>
-      )
-    }
-
-    {
-      featuredPosts.length > 0 && (
-        <>
-          <section id="featured">
-            <h2>Featured</h2>
-            <ul>
-              {featuredPosts.map(({ data, slug }) => (
-                <Card
-                  href={`/posts/${slug}/`}
-                  frontmatter={data}
-                  secHeading={false}
-                />
-              ))}
-            </ul>
-          </section>
-          {recentPosts.length > 0 && <Hr />}
-        </>
-      )
-    }
-
-    <div class="all-posts-btn-wrapper">
-      <LinkButton href="/posts/">
-        All Posts
-        <svg xmlns="http://www.w3.org/2000/svg"
-          ><path
-            d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
-          ></path>
-        </svg>
-      </LinkButton>
-    </div>
   </main>
 
   <Footer />

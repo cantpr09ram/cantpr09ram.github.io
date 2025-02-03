@@ -1,13 +1,13 @@
 import type { Site, SocialObjects } from "./types";
 
 export const SITE: Site = {
-  website: "https://astro-paper.pages.dev/", // replace this with your deployed domain
-  author: "Cantpr09ram",
+  website: "https://cantpr09ram.github.io/", // replace this with your deployed domain
+  author: "cantpr09ram",
   desc: "A place where I write something not important.",
   title: "Cantpr09ram's blog",
   ogImage: "og-image.png",
   lightAndDarkMode: true,
-  postPerPage: 10,
+  postPerPage: 100,
   scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
 };
 
@@ -140,8 +140,14 @@ export const SOCIALS: SocialObjects = [
   },
   {
     name: "Mastodon",
-    href: "https://github.com/satnaing/astro-paper",
+    href: "https://mastodon.social/@cantpr09ram",
     linkTitle: `${SITE.title} on Mastodon`,
-    active: false,
+    active: true,
+  },
+  {
+    name: "RSS",
+    href: "/rss.xml",
+    linkTitle: `My RSS feed`,
+    active: true,
   },
 ];

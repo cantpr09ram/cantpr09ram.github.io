@@ -13,6 +13,8 @@ description: "AUT RUN AUT NIHIL"
 canonicalURL: https://cantpr09ram.github.io/posts/2024-review
 ---
 
+![og](@assets/images/og-image.png)
+
 # My 2024 Review
 
 之前的年度總結也不是不好，就是比較沒有架構，沒有辦法完整表達我想表達的所有想法。所以這一次決定採用我在[網路](https://stephango.com/40-questions)看到的這40個問題，都這麼多問題的應該是相當全面了。

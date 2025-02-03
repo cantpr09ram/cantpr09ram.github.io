@@ -1,6 +1,5 @@
 ---
 import { LOGO_IMAGE, SITE } from "@config";
-import Hr from "./Hr.astro";
 import LinkButton from "./LinkButton.astro";
 
 export interface Props {
@@ -109,7 +108,6 @@ const { activeNav } = Astro.props;
       </nav>
     </div>
   </div>
-  <Hr />
 </header>
 
 <style>
@@ -152,7 +150,7 @@ const { activeNav } = Astro.props;
     @apply col-span-1;
   }
   nav a.active {
-    @apply underline decoration-wavy decoration-2 underline-offset-4;
+    @apply no-underline decoration-2 underline-offset-4;
   }
   nav a.active svg {
     @apply fill-skin-accent;

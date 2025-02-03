@@ -41,7 +41,11 @@ const socialImageURL = new URL(
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <!-- SVG for browsers that support it -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Fallback ICO for Edge or other browsers -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
 
