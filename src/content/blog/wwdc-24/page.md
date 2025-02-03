@@ -9,12 +9,12 @@ tags:
   - iOS
   - code
   - wwdc
-ogImage: "@assets/images/2024-VVDC/2024vvdc-og.png"
+ogImage: "./2024vvdc-og.png"
 description: 2024 VVDC Swift Student Challenge 覆盤以及我目前對這方面的想法
 canonicalURL: https://cantpr09ram.github.io/posts/2024-VVDC
 ---
 
-![og](@assets/images/2024-VVDC/2024vvdc-og.png)
+![og](./2024vvdc-og.png)
 
 # 2024 VVDC Swift Student Challenge 覆盤以及一些的看法、計畫
 
@@ -35,13 +35,13 @@ canonicalURL: https://cantpr09ram.github.io/posts/2024-VVDC
 
 我剛開始的時候完全沒有任何的想法，本來我都不打算參加這次的活動了。但是我後來想說我這輩子能參加幾次所以我就去參考[這個網站](https://www.wwdcscholars.com/?utm_source=pocket_saves)基本上我就是看看得獎者做了什麼，算是一種靈感的激發。<br>
 然後我就開始我的專案了，我想做一個模擬訊息傳遞過程中以訛傳訛的現象，一開始你可以從預設的圖片開始(一張Taipei Times)或者也可以自己上傳圖片或者是上傳一段文字
-![start-with-default](@assets/images/2024-VVDC/start-with-default.png)
+![start-with-default](./start-with-default.png)
 接下來每個人會隨機看到前面的人寫的東西，然後他們必須嘗試描述他們看到的東西並且記錄下來幫助接下來的人了解這件事情。我是以這種形式模擬你在網路上看到東西的然後告訴其他人你看到什麼的過程，有些人可能剛開始看到的就是錯的所以也是輸出錯誤的資訊。當然不排除有人刻意製造假消息，當然結果也是顯而易見的。
-![write-what-you-see](@assets/images/2024-VVDC/write-down.png)
+![write-what-you-see](./write-down.png)
 接下來你會同時看到一個人的紀錄以及原始的資訊，然後你要根據原始的訊息為這個人的紀錄打分數。就是在真和假之間找到評分，當然這個過程也是用亂數做到隨機的。
-![rating](@assets/images/2024-VVDC/rating.png)
+![rating](./rating.png)
 接著就會顯示一個結果，包含原始的訊息及一個真實度的曲線圖。其實這個圖表嚴格說是沒有什麼意義的，因為我把 x,y 軸上的數字都去掉了，但是還是可以看到真實性的變化。我就是做這一頁的目標是一個遊戲結束然後結算分數讓使用者觀察。
-![result](@assets/images/2024-VVDC/result.png)
+![result](./result.png)
 最後這個[專案](https://github.com/cantpr09ram/2024-SwiftStudentChallenge)是開源的
 
 ## 覆盤

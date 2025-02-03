@@ -1,9 +1,10 @@
-import { defineConfig, squooshImageService } from "astro/config";
+import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
 import sitemap from "@astrojs/sitemap";
+import mdx from "@astrojs/mdx";
 import { SITE } from "./src/config";
 
 // https://astro.build/config
@@ -14,6 +15,7 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
     react(),
+    mdx(),
     sitemap(),
   ],
   markdown: {
@@ -37,7 +39,4 @@ export default defineConfig({
     },
   },
   scopedStyleStrategy: "where",
-  image: {
-    service: squooshImageService(),
-  },
 });

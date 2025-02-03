@@ -7,12 +7,14 @@ draft: false
 tags:
   - life
   - review
+ogImage: "@assets/images/og-image.png"
 description: 我也不知道我在幹嘛的一年
 ---
 
+![2023](./2023.jpg)
+
 # 我的2023
 
-![2023](@assets/images/2023-review/2023.jpg)<br>
 2023對我來說就是不知不覺就結束了。本來還沈浸在剛上大學一定要在大學有一番作為到年底的時候突然發現已經快過完一半了，結果自己還是一事無成。或許維持常態才是所謂的“常態”，所以凡人如我還是把改變指望在平時每次小小的改變，透過這些改變造成“質的改變”。
 
 <blockquote class="twitter-tweet"><p lang="zh" dir="ltr">3. 這個問題我只能說我覺得沒有做到。剛開始覺得離開園區以後生活少了那些限制會快樂很多，但是過了一段時間就開始覺得也不是那麼美好，甚至會強制自己少做那些事。而且我覺得自己沒有很好的融入這個社會，雖然沒有什麼特別不愉快的經驗(基本的察言觀色還是有的) 總之就是和我認知中的情況有落差</p>&mdash; \u8b19 (@cantpr09ram) <a href="https://twitter.com/cantpr09ram/status/1741473682281959857?ref_src=twsrc%5Etfw">December 31, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
