@@ -1,11 +1,11 @@
 ---
-import { LOGO_IMAGE, SITE } from "@config";
+import { SITE } from "@config";
 import LinkButton from "./LinkButton.astro";
-
+import { NameTransition } from "@components/name.tsx";
 export interface Props {
   activeNav?: "posts" | "tags" | "about" | "search";
 }
-
+//""
 const { activeNav } = Astro.props;
 ---
 
@@ -13,19 +13,11 @@ const { activeNav } = Astro.props;
   <a id="skip-to-content" href="#main-content">Skip to content</a>
   <div class="nav-container">
     <div class="top-nav-wrap">
-      <a href="/" class="logo whitespace-nowrap">
-        {
-          LOGO_IMAGE.enable ? (
-            <img
-              src={`/assets/${LOGO_IMAGE.svg ? "logo.svg" : "logo.png"}`}
-              alt={SITE.title}
-              width={LOGO_IMAGE.width}
-              height={LOGO_IMAGE.height}
-            />
-          ) : (
-            SITE.title
-          )
-        }
+      <a href="/">
+        <NameTransition
+          name1={SITE.title}
+          name2={"FORTIS FORTUNA ADIUVAT   "}
+        />
       </a>
       <nav id="nav-menu">
         <button
