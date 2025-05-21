@@ -40,7 +40,9 @@ export default function TypewriterEffect({
         initial={{ width: 0 }}
         animate={controls}
       />
-      <h1 className="text-4xl font-bold relative z-10">{displayedText}</h1>
+      <h1 className="text-4xl font-bold relative z-10">
+        {displayedText || <span className="opacity-50">&nbsp;</span>}
+      </h1>
     </div>
   );
 }

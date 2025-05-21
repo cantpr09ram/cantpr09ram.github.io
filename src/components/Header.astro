@@ -1,7 +1,6 @@
 ---
 import { SITE } from "@config";
 import LinkButton from "./LinkButton.astro";
-import { NameTransition } from "@components/name.tsx";
 export interface Props {
   activeNav?: "posts" | "tags" | "about" | "search";
 }
@@ -14,10 +13,7 @@ const { activeNav } = Astro.props;
   <div class="nav-container">
     <div class="top-nav-wrap">
       <a href="/">
-        <NameTransition
-          name1={SITE.title}
-          name2={"FORTIS FORTUNA ADIUVAT   "}
-        />
+        {SITE.author}
       </a>
       <nav id="nav-menu">
         <button

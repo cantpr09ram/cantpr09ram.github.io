@@ -8,8 +8,10 @@ draft: false
 tags:
   - run
   - life
+  - think
+  - review
 ogImage: "./og.svg"
-description: We do this not because it is easy
+description: We do this not because it is easy, but because we thought it would be easy
 canonicalURL: https://cantpr09ram.github.io/posts/first-marathon
 ---
 
@@ -69,4 +71,12 @@ canonicalURL: https://cantpr09ram.github.io/posts/first-marathon
 
 > Do something that sucks every single day of your life. that's how you grow
 
-滿足自己的虛榮心吧？
+作為一個跑步的假文青，一定有看過《當我談跑步時，我談些什麼》。說句實在話，我看完這本書果你問我「為什麼村上春樹要堅持跑步？」我的答案大概就是自我實現、鍛鍊身體及心靈這樣有跟沒有一樣的答案。但是現在是個人人都在使用 AI 的時代，所以我也不免俗地跟它討論了這個話題。以下的內容有部分來自 AI
+
+1. 維持寫作所需的體能與健康 – 長篇小說寫作是久坐的耐力活；跑步給他強健的心肺、控制體重，讓他「不至於被自己的創作拖垮」。
+2. 自律與節奏的訓練 – 他把每天固定跑步視為「自我紀律的練習」，與每天定量寫作互為鏡像：透過日復一日的小進步累積成大成果。
+3. 追求「空無（void）」的心流 – 他形容長跑過程中，大腦進入一種「空洞」狀態，雜念被消解，只剩純粹的節奏感，這種心流直接轉化為寫作靈感與專注。
+4. 測量並超越昨日的自己 – 他並不追求奪牌，而是重視「今天是否比昨天更強」的內在指標；跑步提供一把客觀尺，督促他持續精進。
+5. 孤獨的修行 – 跑步是一種可隨時啟程、無需隊友的孤獨活動；這與小說家的工作本質契合，讓他在「內向的獨處」中獲得精神補給。
+
+我雖然不是小說家，但是我覺得這些理由也可以借用來當作我為什麼要跑步的答案。
