@@ -10,7 +10,7 @@ tags:
   - life
   - think
   - review
-ogImage: "./og.svg"
+ogImage: "posts/first-marathon.svg"
 description: We do this not because it is easy, but because we thought it would be easy
 canonicalURL: https://cantpr09ram.github.io/posts/first-marathon
 ---

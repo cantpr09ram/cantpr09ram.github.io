@@ -9,7 +9,7 @@ tags:
   - iOS
   - code
   - wwdc
-ogImage: "./2024vvdc-og.png"
+ogImage: "posts/2024vvdc-og.png"
 description: 2024 VVDC Swift Student Challenge 覆盤以及我目前對這方面的想法
 canonicalURL: https://cantpr09ram.github.io/posts/2024-VVDC
 ---

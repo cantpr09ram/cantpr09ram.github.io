@@ -9,7 +9,7 @@ tags:
   - code
   - frontend
   - think
-ogImage: "./new-blog-og.png"
+ogImage: "posts/new-blog-og.png"
 description: Why Do I Need a New Blog and the Process of Creating a New Blog
 canonicalURL: https://cantpr09ram.github.io/posts/my-new-blog/
 ---
@@ -18,7 +18,7 @@ canonicalURL: https://cantpr09ram.github.io/posts/my-new-blog/
 
 ## 爲什麼我需要一個新的 Blog？
 
-我覺得舊的不是不能用，但是我還是有些地方我不滿意，像是 dark mode 的體驗就一言難盡，雖然不醜（我是信奉"semple is better then complex"）但是就是看不順眼。最重要的是分享的時候沒有辦法顯示漂亮的 metadata，雖然後來我自己有加入這個功能，但是就不是很理想。而不理想的 blog 造成最大的問題就是我不太想寫東西。
+我覺得舊的不是不能用，但是我還是有些地方我不滿意，像是 dark mode 的體驗就一言難盡，雖然不醜（我是信奉"simple is better than complex"）但是就是看不順眼。最重要的是分享的時候沒有辦法顯示漂亮的 metadata，雖然後來我自己有加入這個功能，但是就不是很理想。而不理想的 blog 造成最大的問題就是我不太想寫東西。
 
 ## 爲什麼我需要一個 Blog？
 
