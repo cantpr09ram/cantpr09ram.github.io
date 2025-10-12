@@ -1,19 +1,21 @@
 ---
+import { GITHUB, TWITTER } from "../consts";
+
 const today = new Date();
 ---
 
-<footer class="py-10">
-	&copy; {today.getFullYear()} Your name here. All rights reserved.
+<footer class="py-10 pl-2">
+	&copy; {today.getFullYear()} All rights reserved.
 	<div class="flex gap-4 mt-4">
 		<a 
-			href="https://m.webtoo.ls/@astro" 
+			href={`https://github.com/${GITHUB}`}
 			target="_blank" 
 			class="text-white hover:text-gray-400 hover:underline"
 		>
 			<p>GitHub</p>
 		</a>
 		<a 
-			href="https://twitter.com/astrodotbuild" 
+			href={`https://twitter.com/${TWITTER}`}
 			target="_blank" 
 			class="text-white hover:text-gray-400 hover:underline"
 		>

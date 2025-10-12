@@ -4,7 +4,7 @@ import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import Header from "../components/Header.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import { SITE_DESCRIPTION, SITE_TITLE, INTRO } from "../consts";
 
 const posts = (await getCollection("blog")).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -21,9 +21,9 @@ const posts = (await getCollection("blog")).sort(
 		<main class="max-w-[60ch] mx-auto w-full">
 				<Header />
 				<h1 class="text-2xl pl-2 py-5">你好! Hello! Bonjour! こんにちは!</h1>
-
+				<p class="pl-2 pb-3">{INTRO}</p>
 				<section class="pl-2">
-					<h3 class="text-xl pb-2">Recent Blog</h3>
+					<h3 class="text-xl pb-2">Recent</h3>
 					<ul class="space-y-2">
 						{
 						posts.slice(0, 3).map((post) => (

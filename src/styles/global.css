@@ -108,20 +108,29 @@ pre code span {
 }
 
 .prose img {
-	/* Don't apply styles to next/image */
-	@apply m-0;
+	@apply p-3;
 }
 
 .prose p {
 	@apply my-4 text-neutral-800 dark:text-neutral-200;
 }
 
-h1,
-h2,
-h3,
-h4 {
-	text-wrap: balance;
+.prose h1 {
+  @apply text-4xl font-medium tracking-tight mt-6 mb-2;
 }
+
+.prose h2 {
+  @apply text-xl font-medium tracking-tight mt-6 mb-2;
+}
+
+.prose h3 {
+  @apply text-xl font-medium tracking-tight mt-6 mb-2;
+}
+
+.prose h4 {
+  @apply text-lg font-medium tracking-tight mt-6 mb-2;
+}
+
 
 .prose strong {
 	@apply font-medium;
@@ -136,7 +145,7 @@ h4 {
 }
 
 .prose blockquote {
-	@apply border-l-4 border-gray-300 pl-6 pr-4 py-2 bg-gray-800 rounded-md leading-relaxed break-words shadow;
+	@apply m-2 border-l-4 border-gray-300 pl-4 pr-2 py-2 bg-gray-800 rounded-md leading-relaxed break-words shadow;
 }
 
 .prose > :first-child {
