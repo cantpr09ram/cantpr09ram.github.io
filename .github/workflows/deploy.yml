@@ -1,4 +1,4 @@
-name: Preview Astro site on Pages
+name: deployment
 
 on:
   push:
