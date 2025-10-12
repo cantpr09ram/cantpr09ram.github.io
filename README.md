@@ -1,14 +1,6 @@
-# Site
+## site
 
-- Astro
-- Github Action
-- Github Page
-
-Run Locally
-
-```bash
+```shell
 pnpm install
-pnpm run dev
-#Build
-pnpm astro build
+pnpm dev
 ```

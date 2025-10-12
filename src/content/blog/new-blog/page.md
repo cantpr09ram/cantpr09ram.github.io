@@ -1,20 +1,9 @@
 ---
 title: My new blog
-author: Me
-pubDatetime: 2024-03-13T07:55:15.614Z
-slug: my-new-blog
-featured: false
-draft: false
-tags:
-  - code
-  - frontend
-  - think
-ogImage: "posts/new-blog-og.png"
+pubDate: 2024-03-13T07:55:15.614Z
 description: Why Do I Need a New Blog and the Process of Creating a New Blog
-canonicalURL: https://cantpr09ram.github.io/posts/my-new-blog/
+slug: my-new-blog
 ---
-
-![og](./new-blog-og.png)
 
 ## 爲什麼我需要一個新的 Blog？
 

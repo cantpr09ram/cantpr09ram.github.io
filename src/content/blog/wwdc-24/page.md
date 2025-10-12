@@ -1,17 +1,8 @@
 ---
 title: 2024 Swift Student Challenge
-author: Me
-pubDatetime: 2024-05-04T05:18:43.513Z
-slug: 2024-VVDC
-featured: false
-draft: false
-tags:
-  - iOS
-  - code
-  - wwdc
-ogImage: "posts/2024vvdc-og.png"
+pubDate: 2024-05-04T05:18:43.513Z
 description: 2024 VVDC Swift Student Challenge 覆盤以及我目前對這方面的想法
-canonicalURL: https://cantpr09ram.github.io/posts/2024-VVDC
+slug: 2024-wwdc
 ---
 
 ![og](./2024vvdc-og.png)

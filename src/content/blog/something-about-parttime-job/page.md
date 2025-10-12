@@ -1,18 +1,9 @@
 ---
-author: Me
-pubDatetime: 2023-07-12T22:25:03.284Z
+pubDate: 2023-07-12
 title: 第一次程式工讀經驗
-slug: something-about-part-time-job
-featured: false
-draft: false
-tags:
-  - code
-  - work
-ogImage: "@assets/images/og-image.png"
 description: 第一次跟開發有關的打工的經驗
+slug: something-about-part-time-job
 ---
-
-![og](@assets/images/og-image.png)
 
 <blockquote class="twitter-tweet"><p lang="zh" dir="ltr">「關於資訊工程系的學生不諳電腦程式設計，有何對策？」<br>「上凱達格蘭大道抗議，公平正義救學生，這些開發工具廠商欺負我們學生」</p>&mdash; Jim Huang (@jserv) <a href="https://twitter.com/jserv/status/1677203033158213632?ref_src=twsrc%5Etfw">July 7, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 

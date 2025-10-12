@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+::selection {
+	background-color: #47a3f3;
+	color: #fefefe;
+}
+
+:root {
+	--sh-class: #7aa2f7;
+	--sh-sign: #89ddff;
+	--sh-string: #9ece6a;
+	--sh-keyword: #bb9af7;
+	--sh-comment: #565f89;
+	--sh-jsxliterals: #7aa2f7;
+	--sh-property: #73daca;
+	--sh-entity: #e0af68;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--sh-class: #4c97f8;
+		--sh-identifier: white;
+		--sh-keyword: #f47067;
+		--sh-string: #0fa295;
+	}
+	html {
+		color-scheme: dark;
+	}
+}
+
+html {
+	min-width: 360px;
+	scrollbar-gutter: stable;
+}
+
+.prose .anchor {
+	@apply absolute invisible no-underline;
+
+	margin-left: -1em;
+	padding-right: 0.5em;
+	width: 80%;
+	max-width: 700px;
+	cursor: pointer;
+}
+
+.anchor:hover {
+	@apply visible;
+}
+
+.prose a {
+	@apply underline transition-all decoration-neutral-400 dark:decoration-neutral-600 underline-offset-2 decoration-[0.1em];
+}
+
+.prose .anchor:after {
+	@apply text-neutral-300 dark:text-neutral-700;
+	content: "#";
+}
+
+.prose *:hover > .anchor {
+	@apply visible;
+}
+
+.prose pre {
+	@apply bg-neutral-50 dark:bg-neutral-900 rounded-lg overflow-x-auto border border-neutral-200 dark:border-neutral-900 py-2 px-3 text-sm;
+}
+
+code {
+	font-family: "Menlo", "Monaco", "Courier New", monospace;
+	font-size: 14px;
+	padding: 0.2em 0.4em;
+	border-radius: 0.3em;
+	background-color: var(--color-gray-100);
+}
+
+pre code {
+	background-color: transparent;
+	padding: 0;
+	border: none;
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+pre code > span .sh__token--identifier {
+	color: white;
+}
+
+code:not(pre code) span {
+	font-weight: 500;
+	color: black;
+}
+
+@media (prefers-color-scheme: dark) {
+	code {
+		font-family: "Menlo", "Monaco", "Courier New", monospace;
+		font-size: 14px;
+		padding: 0.2em 0.4em;
+		border-radius: 0.3em;
+		background-color: var(--color-zinc-800);
+	}
+
+	code:not(pre code) span {
+		color: var(--color-zinc-100);
+	}
+}
+
+pre code span {
+	font-weight: 500;
+}
+
+.prose img {
+	@apply p-3;
+}
+
+.prose p {
+	@apply my-4 text-neutral-800 dark:text-neutral-200;
+}
+
+.prose h1 {
+  @apply text-4xl font-medium tracking-tight mt-6 mb-2;
+}
+
+.prose h2 {
+  @apply text-xl font-medium tracking-tight mt-6 mb-2;
+}
+
+.prose h3 {
+  @apply text-xl font-medium tracking-tight mt-6 mb-2;
+}
+
+.prose h4 {
+  @apply text-lg font-medium tracking-tight mt-6 mb-2;
+}
+
+
+.prose strong {
+	@apply font-medium;
+}
+
+.prose ul {
+	@apply list-disc pl-6;
+}
+
+.prose ol {
+	@apply list-decimal pl-6;
+}
+
+.prose blockquote {
+	@apply m-2 border-l-4 border-gray-300 pl-4 pr-2 py-2 bg-gray-800 rounded-md leading-relaxed break-words shadow;
+}
+
+.prose > :first-child {
+	/* Override removing top margin, causing layout shift */
+	margin-top: 1.25em;
+	margin-bottom: 1.25em;
+}
+
+pre::-webkit-scrollbar {
+	display: none;
+}
+
+pre {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+/* Remove Safari input shadow on mobile */
+input[type="text"],
+input[type="email"] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+table {
+	display: block;
+	max-width: fit-content;
+	overflow-x: auto;
+	white-space: nowrap;
+	text-align: left;
+}
+
+.title {
+	text-wrap: balance;
+}

@@ -20,4 +20,5 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
-Markdown style guide.md
+# jetbrains setting folder
+.idea/

@@ -1,15 +1,8 @@
 ---
-author: Me
-pubDatetime: 2023-01-28T22:25:03.284Z
+pubDate: 2023-01-28
 title: 2022 Review
-slug: 2022-review
-featured: true
-draft: false
-tags:
-  - life
-  - review
-ogImage: "@assets/images/og-image.png"
 description: "2022 Review"
+slug: 2022-review
 ---
 
 ![2022_review](./2022_review.jpg)

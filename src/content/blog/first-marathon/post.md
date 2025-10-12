@@ -1,23 +1,10 @@
 ---
-author: Me
-pubDatetime: 2025-03-16T08:08:30.099Z
-title: First Marathon
+title: 'First Marathon'
+description: 'first-marathon'
+pubDate: '2025-03-16'
 slug: first-marathon
-featured: true
-draft: false
-tags:
-  - run
-  - life
-  - think
-  - review
-ogImage: "posts/first-marathon.png"
-description: We do this not because it is easy, but because we thought it would be easy
-canonicalURL: https://cantpr09ram.github.io/posts/first-marathon
+heroImage: ''
 ---
-
-# My First Marathon
-
-![og](./og.svg)
 
 其實跑完馬拉松的當下沒什麼特別的感覺，除了抽筋很痛以外(有照片為證但是我沒花錢買)真的沒什麼特別的感覺。只有坐公車回家的路上突然意識到自己真的跑了好遠。(訓練的時候最多跑了32公里而已)
 
