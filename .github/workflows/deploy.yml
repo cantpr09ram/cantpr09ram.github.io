@@ -44,4 +44,6 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         with:
-          preview: ${{ github.event_name != 'push' || github.ref_name != 'main' }}
+          with:
+            preview: ${{ !(github.event_name == 'push' && github.ref_name == 'main') }}
+
