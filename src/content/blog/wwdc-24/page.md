@@ -1,8 +1,8 @@
 ---
 title: 2024 Swift Student Challenge
 pubDate: 2024-05-04T05:18:43.513Z
-ogImage: "./2024vvdc-og.png"
 description: 2024 VVDC Swift Student Challenge 覆盤以及我目前對這方面的想法
+slug: 2024-wwdc
 ---
 
 ![og](./2024vvdc-og.png)

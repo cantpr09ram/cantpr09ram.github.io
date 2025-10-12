@@ -2,6 +2,7 @@
 title: 2024 Review
 pubDate: 2025-01-18
 description: "AUT RUN AUT NIHIL"
+slug: 2024-review
 ---
 之前的年度總結也不是不好，就是比較沒有架構，沒有辦法完整表達我想表達的所有想法。所以這一次決定採用我在[網路](https://stephango.com/40-questions)看到的這40個問題，都這麼多問題的應該是相當全面了。
 

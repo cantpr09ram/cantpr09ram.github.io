@@ -1,11 +1,11 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
+import type { CollectionEntry } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import Header from "../components/Header.astro";
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<"blog">["data"];
 const { title, description, pubDate, updatedDate } = Astro.props;
 ---
 
@@ -22,31 +22,33 @@ const { title, description, pubDate, updatedDate } = Astro.props;
     </script>
   </head>
 
-  <body class="antialiased max-w-xl mx-4 mt-8 lg:mx-auto">
-		<main class="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
-      <Header />
-      <article>
-        <div class="mx-auto w-full max-w-[720px] px-3 text-gray-700 dark:text-gray-200 py-5">
-          <div class="mb-4 py-2 text-left leading-none">
-            <h1 class="mb-2 text-3xl font-bold text-gray-900 dark:text-gray-100">{title}</h1>
-            <div class="mb-2 text-gray-500 dark:text-gray-400">
-              <FormattedDate date={pubDate} />
-              {
-                updatedDate && (
-                  <div class="italic">
-                    Last updated on <FormattedDate date={updatedDate} />
-                  </div>
-                )
-              }
+  <body class="antialiased tracking-tight">
+    <div class="min-h-screen flex flex-col justify-between pt-10 md:pt-8 p-8 dark:bg-zinc-950 bg-white text-gray-900 dark:text-zinc-200">
+      <main class="max-w-[60ch] mx-auto w-full">
+        <Header />
+        <article>
+          <div class="mx-auto w-full max-w-[720px] px-3 text-gray-700 dark:text-gray-200 py-5">
+            <div class="mb-4 py-2 text-left leading-none">
+              <h1 class="mb-2 text-3xl font-bold text-gray-900 dark:text-gray-100">{title}</h1>
+              <div class="mb-2 text-gray-500 dark:text-gray-400">
+                <FormattedDate date={pubDate} />
+                {
+                  updatedDate && (
+                    <div class="italic">
+                      Last updated on <FormattedDate date={updatedDate} />
+                    </div>
+                  )
+                }
+              </div>
+              <hr class="border-gray-200 dark:border-gray-800" />
             </div>
-            <hr class="border-gray-200 dark:border-gray-800" />
+            <div class="prose max-w-none dark:prose-invert">
+              <slot />
+            </div>
           </div>
-          <div class="prose max-w-none dark:prose-invert">
-            <slot />
-          </div>
-        </div>
-      </article>
-    <Footer />
-    </main>
+        </article>
+      <Footer />
+      </main>
+    </div>
   </body>
 </html>

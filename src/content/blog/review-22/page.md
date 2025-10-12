@@ -2,6 +2,7 @@
 pubDate: 2023-01-28
 title: 2022 Review
 description: "2022 Review"
+slug: 2022-review
 ---
 
 ![2022_review](./2022_review.jpg)

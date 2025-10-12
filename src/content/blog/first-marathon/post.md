@@ -2,6 +2,7 @@
 title: 'First Marathon'
 description: 'first-marathon'
 pubDate: '2025-03-16'
+slug: first-marathon
 heroImage: ''
 ---
 

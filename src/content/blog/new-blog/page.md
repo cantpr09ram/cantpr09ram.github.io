@@ -2,6 +2,7 @@
 title: My new blog
 pubDate: 2024-03-13T07:55:15.614Z
 description: Why Do I Need a New Blog and the Process of Creating a New Blog
+slug: my-new-blog
 ---
 
 ## 爲什麼我需要一個新的 Blog？
