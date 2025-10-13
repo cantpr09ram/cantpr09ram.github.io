@@ -26,12 +26,12 @@ const posts = (await getCollection("blog")).sort(
 					{
 					posts.map((post) => (
 						<li class="flex flex-row items-baseline space-x-4">
-						<p class="text-gray-400 shrink-0 w-30">
+						<p class="text-gray-500 shrink-0 w-30">
 							<FormattedDate date={post.data.pubDate} />
 						</p>
 						<a
 							href={`/blog/${post.id}/`}
-							class="text-white hover:underline"
+							class="hover:underline"
 						>
 							{post.data.title}
 						</a>

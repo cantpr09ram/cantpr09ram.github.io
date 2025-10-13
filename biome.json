@@ -6,7 +6,8 @@
 		"useIgnoreFile": false
 	},
 	"files": {
-		"ignoreUnknown": false
+		"ignoreUnknown": false,
+		"includes": ["**/*.{astro,css,js,jsx,ts,tsx}"]
 	},
 	"formatter": {
 		"enabled": true,
@@ -15,7 +16,10 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
+			"recommended": true,
+			"suspicious": {
+				"noUnknownAtRules": "off"
+			}
 		}
 	},
 	"javascript": {
@@ -23,17 +27,22 @@
 			"quoteStyle": "double"
 		}
 	},
-	"assist": {
-		"enabled": true,
-		"actions": {
-			"source": {
-				"organizeImports": "on"
-			}
-		}
-	},
 	"overrides": [
 		{
-			"includes": ["**/*.svelte", "**/*.astro", "**/*.vue"],
+			"includes": [".astro/**/*.d.ts"],
+			"linter": {
+				"rules": {
+					"suspicious": {
+						"noExplicitAny": "off"
+					},
+					"complexity": {
+						"noBannedTypes": "off"
+					}
+				}
+			}
+		},
+		{
+			"includes": ["**/*.astro", "**/*.ts", "**/*.tsx", "**/*.css"],
 			"linter": {
 				"rules": {
 					"style": {
