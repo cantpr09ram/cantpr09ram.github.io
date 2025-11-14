@@ -17,7 +17,7 @@
 		"@astrojs/sitemap": "^3.6.0",
 		"@resvg/resvg-js": "^2.6.2",
 		"@tailwindcss/vite": "^4.1.14",
-		"astro": "^5.14.4",
+		"astro": "^5.15.6",
 		"consola": "^3.4.2",
 		"satori": "^0.18.3",
 		"sharp": "^0.34.3",
