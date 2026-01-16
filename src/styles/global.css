@@ -185,3 +185,7 @@ table {
 .title {
 	text-wrap: balance;
 }
+
+@theme {
+	--font-sans: "Noto Sans TC", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
