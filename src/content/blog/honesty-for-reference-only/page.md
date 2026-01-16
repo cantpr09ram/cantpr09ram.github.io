@@ -1,8 +1,8 @@
 ---
-title: 'why'
-description: 'why'
+title: 'Honesty for Reference Only'
+description: 'Honesty for Reference Only'
 pubDate: '2026-01-15'
-slug: why
+slug: honesty-for-reference-only
 heroImage: ''
 ---
 
