@@ -26,12 +26,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Read pnpm version from package.json
+        id: pm
+        shell: bash
+        run: |
+          PM=$(node -p "require('./package.json').packageManager")
+          echo "packageManager=$PM" >> "$GITHUB_OUTPUT"
+
       - name: Install, build, and upload your site
         uses: withastro/action@v3
         with:
-          path: . # The root location of your Astro project inside the repository. (optional)
+          path: .
           node-version: 22
-          package-manager: pnpm@latest 
+          package-manager: ${{ steps.pm.outputs.packageManager }}
 
   deploy:
     needs: build
