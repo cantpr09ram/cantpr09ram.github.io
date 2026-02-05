@@ -1,0 +1,56 @@
+name: Update Strava Stats
+
+on:
+  schedule:
+    - cron: '0 22 * * *'
+  workflow_dispatch: # 允許手動觸發
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write 
+      
+    env:
+      TZ: 'Asia/Taipei'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Fetch Strava Data
+  
+        run: pnpm run strava-sync
+        env:
+         
+          STRAVA_CLIENT_ID: ${{ secrets.STRAVA_CLIENT_ID }}
+          STRAVA_CLIENT_SECRET: ${{ secrets.STRAVA_CLIENT_SECRET }}
+          STRAVA_REFRESH_TOKEN: ${{ secrets.STRAVA_REFRESH_TOKEN }}
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "strava-bot"
+          git config --global user.email "strava-bot@github.com"
+          
+          if [[ -n $(git status --porcelain content/data/strava.json) ]]; then
+            git add content/data/strava.json
+            git commit -m "chore(data): update strava stats [skip ci]"
+            git push
+          else
+            console.log("No changes to commit.")
+          fi
