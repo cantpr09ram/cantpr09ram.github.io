@@ -1,11 +1,11 @@
 ---
 import { GITHUB, TWITTER } from "../consts";
-
+import { NAME } from "../consts"
 const today = new Date();
 ---
 
-<footer class="py-10 pl-2">
-	&copy; {today.getFullYear()} All rights reserved.
+<footer class="text-sm py-10 pl-2">
+	Copyright &copy; {today.getFullYear()} {NAME}. All rights reserved.
 	<div class="flex gap-4 mt-4">
 		<a 
 			href={`https://github.com/${GITHUB}`}

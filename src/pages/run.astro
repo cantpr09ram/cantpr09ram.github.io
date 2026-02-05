@@ -1,20 +1,34 @@
 ---
+import strava from "../data/strava.json";
 import BaseHead from "../components/BaseHead.astro";
-import Map from "../components/map";
-import Counter from "../components/counter";
-import "leaflet/dist/leaflet.css";
 ---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title="RUN" description= "My running journey" />
-	</head>
-	<body class="antialiased lg:mx-auto">
-		<main class="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
-            <div class="grid h-screen place-items-center">
-                <Map client:only="react" />
-            </div>
-		</main>
-	</body>
+  <head>
+    <BaseHead title="Run Stats" description="Strava running stats" />
+  </head>
+  <body class="antialiased tracking-tight">
+    <div class="min-h-screen flex items-center justify-center p-8 dark:bg-zinc-950 bg-white text-gray-900 dark:text-zinc-200">
+      <main class="text-center space-y-6" style="view-transition-name: run-page;">
+        <div class="gap-6">
+          <div class="rounded-xl dark:border-zinc-800 p-6 min-w-[180px]">
+            <div class="text-sm uppercase tracking-wide text-gray-500 dark:text-zinc-400">This Year</div>
+            <div class="text-4xl font-bold">{strava.year} {strava.unit}</div>
+          </div>
+          <div class="rounded-xl dark:border-zinc-800 p-6 min-w-[180px]">
+            <div class="text-sm uppercase tracking-wide text-gray-500 dark:text-zinc-400">This Month</div>
+            <div class="text-4xl font-bold">{strava.month} {strava.unit}</div>
+          </div>
+          <div class="rounded-xl dark:border-zinc-800 p-6 min-w-[180px]">
+            <div class="text-sm uppercase tracking-wide text-gray-500 dark:text-zinc-400">This Week</div>
+            <div class="text-4xl font-bold">{strava.week} {strava.unit}</div>
+          </div>
+          <div class="text-shadow-sm pt-20 text-gray-500 dark:text-zinc-400">
+            Last Updated: {new Date(strava.updated_at).toString()}
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
 </html>
-

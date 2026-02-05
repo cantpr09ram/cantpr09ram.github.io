@@ -9,7 +9,8 @@
 		"astro": "astro",
 		"lint": "biome lint .",
 		"format": "biome format --write .",
-		"create": "tsx scripts/create-post.ts"
+		"create": "tsx scripts/create-post.ts",
+		"strava-sync": "tsx scripts/strava.ts"
 	},
 	"dependencies": {
 		"@astrojs/mdx": "^4.3.7",
