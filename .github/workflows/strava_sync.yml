@@ -2,42 +2,49 @@ name: Update Strava Stats
 
 on:
   schedule:
-    - cron: '0 22 * * *'
-  workflow_dispatch: # 允許手動觸發
+    - cron: '0 22 * * *' # 每天台灣時間早上 06:00
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  TZ: 'Asia/Taipei'
 
 jobs:
   update-stats:
     runs-on: ubuntu-latest
-    
-    permissions:
-      contents: write 
-      
-    env:
-      TZ: 'Asia/Taipei'
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install pnpm
+      - name: Read pnpm version from package.json
+        id: pm
+        shell: bash
+        run: |
+          PM=$(node -p "require('./package.json').packageManager")
+          # 這裡多做一步：去掉 "pnpm@" 前綴，只留下純數字版本號 (例如 9.15.4)
+          # 因為 pnpm/action-setup 需要純版本號
+          VERSION=${PM#pnpm@}
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Setup PNPM
         uses: pnpm/action-setup@v3
         with:
-          version: 8
+          version: ${{ steps.pm.outputs.version }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 22 
           cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Fetch Strava Data
-  
         run: pnpm run strava-sync
         env:
-         
           STRAVA_CLIENT_ID: ${{ secrets.STRAVA_CLIENT_ID }}
           STRAVA_CLIENT_SECRET: ${{ secrets.STRAVA_CLIENT_SECRET }}
           STRAVA_REFRESH_TOKEN: ${{ secrets.STRAVA_REFRESH_TOKEN }}
@@ -52,5 +59,5 @@ jobs:
             git commit -m "chore(data): update strava stats [skip ci]"
             git push
           else
-            console.log("No changes to commit.")
+            echo "No changes to commit."
           fi
