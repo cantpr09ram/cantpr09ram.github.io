@@ -1,6 +1,10 @@
 ---
 import strava from "../data/strava.json";
 import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+const date = new Date(strava.updated_at);
+const formatted = date.toISOString().slice(0, 10);
 ---
 
 <!doctype html>
@@ -9,25 +13,20 @@ import BaseHead from "../components/BaseHead.astro";
     <BaseHead title="Run Stats" description="Strava running stats" />
   </head>
   <body class="antialiased tracking-tight">
-    <div class="min-h-screen flex items-center justify-center p-8 dark:bg-zinc-950 bg-white text-gray-900 dark:text-zinc-200">
-      <main class="text-center space-y-6" style="view-transition-name: run-page;">
-        <div class="gap-6">
-          <div class="rounded-xl dark:border-zinc-800 p-6 min-w-[180px]">
-            <div class="text-sm uppercase tracking-wide text-gray-500 dark:text-zinc-400">This Year</div>
-            <div class="text-4xl font-bold">{strava.year} {strava.unit}</div>
-          </div>
-          <div class="rounded-xl dark:border-zinc-800 p-6 min-w-[180px]">
-            <div class="text-sm uppercase tracking-wide text-gray-500 dark:text-zinc-400">This Month</div>
-            <div class="text-4xl font-bold">{strava.month} {strava.unit}</div>
-          </div>
-          <div class="rounded-xl dark:border-zinc-800 p-6 min-w-[180px]">
-            <div class="text-sm uppercase tracking-wide text-gray-500 dark:text-zinc-400">This Week</div>
-            <div class="text-4xl font-bold">{strava.week} {strava.unit}</div>
-          </div>
-          <div class="text-shadow-sm pt-20 text-gray-500 dark:text-zinc-400">
-            Last Updated: {new Date(strava.updated_at).toString()}
-          </div>
-        </div>
+      <div class="min-h-screen flex flex-col justify-between pt-10 md:pt-8 p-8 dark:bg-zinc-950 bg-white text-gray-900 dark:text-zinc-200">
+      <main class="max-w-[60ch] mx-auto w-full">
+        <Header />
+        <section class="pl-2 pb-20">
+            <div class="pt-6 items-center justify-center text-lg">
+                <div class="font-bold">
+                   This Year: {strava.year} {strava.unit}
+                </div>
+                <div class=" text-gray-500 dark:text-zinc-400">
+                  Last Run: {formatted}
+                </div>
+            </div>
+        </section>
+        <Footer />
       </main>
     </div>
   </body>

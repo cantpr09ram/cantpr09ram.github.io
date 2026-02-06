@@ -105,14 +105,6 @@ function calculateStats(activities: StravaActivity[]) {
     if (runDate >= startOfYear) { 
       yearTotal += distanceKm;
     }
-    
-    if (runDate >= startOfMonth) {
-      monthTotal += distanceKm;
-    }
-
-    if (runDate >= startOfWeek) {
-      weekTotal += distanceKm;
-    }
   }
 
   return {

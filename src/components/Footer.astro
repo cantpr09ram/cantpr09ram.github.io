@@ -1,12 +1,10 @@
 ---
-import { GITHUB, TWITTER } from "../consts";
-import { NAME } from "../consts"
+import { NAME, GITHUB, EMAIL } from "../consts"
 const today = new Date();
 ---
 
 <footer class="text-sm py-10 pl-2">
-	Copyright &copy; {today.getFullYear()} {NAME}. All rights reserved.
-	<div class="flex gap-4 mt-4">
+    <div class="flex gap-4 mt-4">
 		<a 
 			href={`https://github.com/${GITHUB}`}
 			target="_blank" 
@@ -16,12 +14,12 @@ const today = new Date();
 			<p>GitHub</p>
 		</a>
 		<a 
-			href={`https://twitter.com/${TWITTER}`}
+			href={`mailto:${EMAIL}`}
 			target="_blank" 
 			class="text-white hover:text-gray-400 hover:underline"
 			rel="noopener noreferrer"
 		>
-			<p>Twitter</p>
+			<p>Email</p>
 		</a>
 		<a 
 			href="/rss.xml" 
@@ -32,4 +30,5 @@ const today = new Date();
 			<p>RSS</p>
 		</a>
 	</div>
+	<p class="pt-2 text-[10px]">&copy; 2022-{today.getFullYear()} {NAME}. Content lincensed unless otherwise stated.</p>
 </footer>

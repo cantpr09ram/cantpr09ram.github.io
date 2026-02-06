@@ -1,7 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
-import { INTRO, SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import { SITE_DESCRIPTION, SITE_TITLE , GITHUB} from "../consts";
 ---
 
 <!doctype html>
@@ -17,9 +17,12 @@ import { INTRO, SITE_DESCRIPTION, SITE_TITLE } from "../consts";
                 <h1 class="text-4xl pl-2 py-5">
                     你好! Hello! Bonjour! こんにちは!
                 </h1>
-                <p class="text-1xl pl-2 pb-3">{INTRO}</p>
+                <p class="text-1xl pl-2 pb-3">👋 I am a university student majoring in electrical engineering, with some experience in front-end, back-end, and iOS development, I'm also a 
+                    <a class="hover:text-gray-400 underline" href="/run">runner</a>. I am trying to 
+                    <a class="hover:text-gray-400 underline" rel="noopener noreferrer" href={`https://github.com/${GITHUB}`}>make</a> good things that matter.</p>
                 <Footer />
             </main>
         </div>
     </body>
 </html>
+ 
