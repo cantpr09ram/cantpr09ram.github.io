@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 env:
   TZ: 'Asia/Taipei'
@@ -50,6 +51,7 @@ jobs:
           STRAVA_REFRESH_TOKEN: ${{ secrets.STRAVA_REFRESH_TOKEN }}
 
       - name: Commit and Push
+        id: commit
         run: |
           git config --global user.name "strava-bot"
           git config --global user.email "strava-bot@github.com"
@@ -58,6 +60,14 @@ jobs:
             git add src/data/strava.json
             git commit -m "chore(data): update strava stats [skip ci]"
             git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           else
             echo "No changes to commit."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Trigger Deploy
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run deployment --ref main
