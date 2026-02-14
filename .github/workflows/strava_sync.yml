@@ -54,8 +54,8 @@ jobs:
           git config --global user.name "strava-bot"
           git config --global user.email "strava-bot@github.com"
           
-          if [[ -n $(git status --porcelain content/data/strava.json) ]]; then
-            git add content/data/strava.json
+          if [[ -n $(git status --porcelain src/data/strava.json) ]]; then
+            git add src/data/strava.json
             git commit -m "chore(data): update strava stats [skip ci]"
             git push
           else
