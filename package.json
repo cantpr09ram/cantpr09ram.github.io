@@ -20,12 +20,16 @@
 		"@resvg/resvg-js": "^2.6.2",
 		"@tailwindcss/vite": "^4.1.14",
 		"astro": "^5.15.9",
+		"astro-embed": "^0.12.0",
 		"consola": "^3.4.2",
 		"fast-glob": "^3.3.3",
 		"fit-file-parser": "^2.1.1",
+		"katex": "^0.16.28",
 		"leaflet": "^1.9.4",
 		"react": "^19.2.3",
 		"react-dom": "^19.2.3",
+		"rehype-katex": "^7.0.1",
+		"remark-math": "^6.0.0",
 		"satori": "^0.18.3",
 		"sharp": "^0.34.3",
 		"tailwindcss": "^4.1.14"
@@ -36,5 +40,5 @@
 		"@types/react-dom": "^19.2.3",
 		"tsx": "^4.20.6"
 	},
-	"packageManager": "pnpm@9.12.3+sha512.cce0f9de9c5a7c95bef944169cc5dfe8741abfb145078c0d508b868056848a87c81e626246cb60967cbd7fd29a6c062ef73ff840d96b3c86c40ac92cf4a813ee"
+	"packageManager": "pnpm@10.29.3"
 }

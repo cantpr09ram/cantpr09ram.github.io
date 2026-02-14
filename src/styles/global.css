@@ -1,5 +1,6 @@
 @import "tailwindcss";
-
+@import "./admonition.css";
+@import "katex/dist/katex.min.css";
 ::selection {
 	background-color: #47a3f3;
 	color: #fefefe;
@@ -121,7 +122,9 @@ pre code span {
 }
 
 .prose img {
-	@apply p-3;
+	max-width: 70%;
+	display: block;
+	margin: 0 auto;
 }
 
 .prose p {
@@ -174,12 +177,25 @@ input[type="email"] {
 	appearance: none;
 }
 
-table {
-	display: block;
-	max-width: fit-content;
-	overflow-x: auto;
-	white-space: nowrap;
-	text-align: left;
+.prose table {
+	@apply my-4 w-full border-collapse text-left;
+}
+
+.prose th,
+.prose td {
+	@apply border-0 px-3 py-2 align-top;
+}
+
+.prose thead tr {
+	@apply border-b border-gray-300 dark:border-gray-700;
+}
+
+.prose tbody tr {
+	@apply border-b border-gray-200 dark:border-gray-800;
+}
+
+.prose tbody tr:last-child {
+	@apply border-b-0;
 }
 
 .title {
@@ -188,4 +204,18 @@ table {
 
 @theme {
 	--font-sans: "Noto Sans TC", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+.mono-date {
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+@layer components {
+	.cactus-link {
+		@apply underline underline-offset-2 hover:decoration-2 hover:decoration-neutral-500 dark:hover:decoration-neutral-300;
+	}
+
+	.title {
+		@apply text-neutral-900 dark:text-neutral-100 text-2xl font-semibold;
+	}
 }
