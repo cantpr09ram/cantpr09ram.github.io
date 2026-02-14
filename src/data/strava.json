@@ -1,7 +1,79 @@
 {
-  "updated_at": "2026-02-05T01:38:59.845+08:00",
+  "updated_at": "2026-02-11T17:58:44.482+08:00",
   "unit": "km",
-  "year": 97.27,
-  "month": 9.49,
-  "week": 9.49
+  "total_km": 107.28,
+  "last_20": [
+    {
+      "date": "2026-02-10T19:07:15Z",
+      "date_iso": "2026-02-10T19:07:15.000Z",
+      "distance_km": 10.01,
+      "name": "Evening Run"
+    },
+    {
+      "date": "2026-02-04T18:58:00Z",
+      "date_iso": "2026-02-04T18:58:00.000Z",
+      "distance_km": 9.49,
+      "name": "Evening Run"
+    },
+    {
+      "date": "2026-01-29T20:10:28Z",
+      "date_iso": "2026-01-29T20:10:28.000Z",
+      "distance_km": 9.34,
+      "name": "Evening Run"
+    },
+    {
+      "date": "2026-01-25T07:29:15Z",
+      "date_iso": "2026-01-25T07:29:15.000Z",
+      "distance_km": 3.57,
+      "name": "Morning Run"
+    },
+    {
+      "date": "2026-01-23T20:44:08Z",
+      "date_iso": "2026-01-23T20:44:08.000Z",
+      "distance_km": 6.26,
+      "name": "Evening Run"
+    },
+    {
+      "date": "2026-01-20T19:57:12Z",
+      "date_iso": "2026-01-20T19:57:12.000Z",
+      "distance_km": 6.16,
+      "name": "Evening Run"
+    },
+    {
+      "date": "2026-01-18T07:22:18Z",
+      "date_iso": "2026-01-18T07:22:18.000Z",
+      "distance_km": 6.02,
+      "name": "Morning Run"
+    },
+    {
+      "date": "2026-01-15T19:52:37Z",
+      "date_iso": "2026-01-15T19:52:37.000Z",
+      "distance_km": 8.18,
+      "name": "Evening Run"
+    },
+    {
+      "date": "2026-01-13T20:24:59Z",
+      "date_iso": "2026-01-13T20:24:59.000Z",
+      "distance_km": 10.89,
+      "name": "Evening Run"
+    },
+    {
+      "date": "2026-01-09T19:24:19Z",
+      "date_iso": "2026-01-09T19:24:19.000Z",
+      "distance_km": 10.25,
+      "name": "Evening Run"
+    },
+    {
+      "date": "2026-01-07T21:03:23Z",
+      "date_iso": "2026-01-07T21:03:23.000Z",
+      "distance_km": 10.09,
+      "name": "Night Run"
+    },
+    {
+      "date": "2026-01-04T07:19:18Z",
+      "date_iso": "2026-01-04T07:19:18.000Z",
+      "distance_km": 17.02,
+      "name": "Morning Run"
+    }
+  ]
 }

@@ -1,7 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
-import { INTRO, SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import { SITE_DESCRIPTION, SITE_TITLE , GITHUB} from "../consts";
 ---
 
 <!doctype html>
@@ -11,15 +11,21 @@ import { INTRO, SITE_DESCRIPTION, SITE_TITLE } from "../consts";
     </head>
     <body class="antialiased tracking-tight">
         <div
-            class="min-h-screen flex flex-col items-center justify-center pt-10 md:pt-8 p-8 dark:bg-zinc-950 bg-white text-gray-900 dark:text-zinc-200"
+            class="min-h-screen flex flex-col pt-10 md:pt-8 p-8 dark:bg-zinc-900 bg-white text-gray-900 dark:text-zinc-200"
         >
-            <main class="max-w-[60ch] mx-auto w-full">
-                <h1 class="text-4xl pl-2 py-5">
-                    你好! Hello! Bonjour! こんにちは!
-                </h1>
-                <p class="text-1xl pl-2 pb-3">{INTRO}</p>
-                <Footer />
+            <main class="flex-1 max-w-[60ch] mx-auto w-full flex flex-col justify-center">
+                <div>
+                    <h1 class="text-2xl pl-3 pb-2">
+                    <a class="hover:text-gray-400 hover:underline" rel="noopener noreferrer" href={`https://github.com/${GITHUB}`}>Craftsman</a>
+                     / <a class="hover:text-gray-400 hover:underline" href="/run">Runner</a>
+                     / Student
+                    </h1> 
+                </div>
             </main>
+            <div class="max-w-[60ch] mx-auto w-full">
+                <Footer />
+            </div>
         </div>
     </body>
 </html>
+ 

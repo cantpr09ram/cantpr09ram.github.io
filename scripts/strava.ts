@@ -2,12 +2,13 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 interface StravaActivity {
-  distance: number;
-  type: string;
-  start_date_local: string;
+  distance: number;          // meters
+  type: string;              // e.g. Run
+  start_date_local: string;  // ISO string
+  name: string;              // activity title
 }
 
-// 載入 .env 檔案 (本地開發用)
+// load .env file
 function loadEnvFile(filePath = path.join(process.cwd(), '.env')) {
   if (!fs.existsSync(filePath)) return;
   const content = fs.readFileSync(filePath, 'utf8');
@@ -36,111 +37,98 @@ const REFRESH_TOKEN = getEnv('STRAVA_REFRESH_TOKEN');
 async function getAccessToken(): Promise<string> {
   const res = await fetch('https://www.strava.com/oauth/token', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      client_id: CLIENT_ID,
-      client_secret: CLIENT_SECRET,
-      refresh_token: REFRESH_TOKEN,
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      client_id: String(CLIENT_ID),
+      client_secret: String(CLIENT_SECRET),
+      refresh_token: String(REFRESH_TOKEN),
       grant_type: 'refresh_token',
     }),
   });
-  if (!res.ok) throw new Error(`Token refresh failed: ${res.statusText}`);
-  return (await res.json() as any).access_token;
+
+  const text = await res.text();
+  if (!res.ok) throw new Error(`Token refresh failed (${res.status}): ${text}`);
+
+  const json = JSON.parse(text) as { access_token: string };
+  if (!json.access_token) throw new Error(`Token refresh response missing access_token: ${text}`);
+  return json.access_token;
 }
 
-async function getAllActivities(token: string): Promise<StravaActivity[]> {
+async function getAllActivitiesThisYear(token: string): Promise<StravaActivity[]> {
   const allActivities: StravaActivity[] = [];
   let page = 1;
   const perPage = 200;
-  
+
   const now = new Date();
-  const startOfYear = new Date(Date.UTC(now.getFullYear(), 0, 1)).getTime() / 1000;
+  const startOfYearUtcSeconds = Date.UTC(now.getFullYear(), 0, 1) / 1000;
 
   while (true) {
     console.log(`Fetching page ${page}...`);
     const res = await fetch(
-      `https://www.strava.com/api/v3/athlete/activities?after=${startOfYear}&per_page=${perPage}&page=${page}`,
+      `https://www.strava.com/api/v3/athlete/activities?after=${startOfYearUtcSeconds}&per_page=${perPage}&page=${page}`,
       { headers: { Authorization: `Bearer ${token}` } }
     );
 
-    if (!res.ok) throw new Error(`Fetch failed: ${res.statusText}`);
-    
-    const data = await res.json() as StravaActivity[];
-    if (data.length === 0) break;
+    const text = await res.text();
+    if (!res.ok) throw new Error(`Fetch failed (${res.status}): ${text}`);
+
+    const data = JSON.parse(text) as StravaActivity[];
+    if (!Array.isArray(data) || data.length === 0) break;
 
     allActivities.push(...data);
-    if (data.length < perPage) break; // 如果回傳數量少於 200，表示是最後一頁
+    if (data.length < perPage) break;
     page++;
   }
-  
+
   return allActivities;
 }
 
-function calculateStats(activities: StravaActivity[]) {
+function calculateAndPick(activities: StravaActivity[]) {
   const now = new Date();
-  const day = now.getDay();
-  const diffToMonday = day === 0 ? 6 : day - 1;
-  
-  const startOfWeek = new Date(now);
-  startOfWeek.setDate(now.getDate() - diffToMonday);
-  startOfWeek.setHours(0, 0, 0, 0);
-  
-  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-  
-  const startOfYear = new Date(now.getFullYear(), 0, 1);
 
-  let yearTotal = 0;
-  let monthTotal = 0;
-  let weekTotal = 0;
-
-  const runs = activities.filter(a => 
+  const runs = activities.filter(a =>
     ['Run', 'TrailRun', 'VirtualRun', 'Treadmill'].includes(a.type)
   );
 
-  console.log({startOfYear},{startOfMonth},{startOfWeek})
-  for (const run of runs) {
-    const runDate = new Date(run.start_date_local); 
-    const distanceKm = run.distance / 1000;
-    
-    if (runDate >= startOfYear) { 
-      yearTotal += distanceKm;
-    }
-    
-    if (runDate >= startOfMonth) {
-      monthTotal += distanceKm;
-    }
+  runs.sort(
+    (a, b) =>
+      new Date(b.start_date_local).getTime() - new Date(a.start_date_local).getTime()
+  );
 
-    if (runDate >= startOfWeek) {
-      weekTotal += distanceKm;
-    }
-  }
+  const totalKm = runs.reduce((sum, a) => sum + a.distance / 1000, 0);
+
+  const last20 = runs.slice(0, 20).map(a => {
+    const d = new Date(a.start_date_local);
+    const km = a.distance / 1000;
+    return {
+      date: a.start_date_local,
+      date_iso: d.toISOString(),
+      distance_km: Number(km.toFixed(2)),
+      name: a.name ?? '',
+    };
+  });
 
   return {
-    updated_at: now.toISOString().replace('Z', '+08:00'), // 標記為台灣時間
+    updated_at: now.toISOString().replace('Z', '+08:00'),
     unit: 'km',
-    year: Number(yearTotal.toFixed(2)),
-    month: Number(monthTotal.toFixed(2)),
-    week: Number(weekTotal.toFixed(2)),
+    total_km: Number(totalKm.toFixed(2)),
+    last_20: last20,
   };
 }
 
 (async () => {
   try {
     const token = await getAccessToken();
-    const activities = await getAllActivities(token);
-    const stats = calculateStats(activities);
-    
-    console.log('Final Stats:', stats);
+    const activities = await getAllActivitiesThisYear(token);
+    const result = calculateAndPick(activities);
+
+    console.log('Output:', result);
 
     const outputPath = 'src/data/strava.json';
     const dir = path.dirname(outputPath);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 
-    // 寫入檔案
-    fs.writeFileSync(outputPath, JSON.stringify(stats, null, 2));
-    
+    fs.writeFileSync(outputPath, JSON.stringify(result, null, 2), 'utf8');
   } catch (error) {
     console.error(error);
     process.exit(1);

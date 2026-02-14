@@ -5,11 +5,23 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
+import rehypeAdmonitions from "./src/plugins/rehype-admonitions.mjs";
 
 // https://astro.build/config
 export default defineConfig({
 	site: "https://cantpr09ram.github.io",
-	integrations: [mdx(), sitemap(), react()],
+	integrations: [
+		mdx({
+			remarkPlugins: [remarkMath],
+			rehypePlugins: [rehypeKatex],
+		}), 
+		sitemap(), 
+		react()],
+	markdown: {
+		rehypePlugins: [rehypeAdmonitions],
+	},
 	vite: {
 		plugins: [tailwindcss()],
 	},

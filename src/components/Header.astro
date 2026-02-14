@@ -1,7 +1,7 @@
 ---
+import { SITE_DESCRIPTION } from "../consts";
 const navLinks = [
-	{ href: "/", label: "Home" },
-	{ href: "/blog", label: "Blog" },
+	{ href: "/", label: SITE_DESCRIPTION },
 ];
 
 const baseClass =
@@ -13,7 +13,7 @@ const baseClass =
     id="nav"
     class="flex flex-row items-start relative px-0 pb-0 fade md:overflow-auto scroll-pr-6 md:relative"
   >
-    <div class="flex flex-row space-x-0 pr-10">
+    <div class="flex flex-row space-x-0 text-xl">
       {navLinks.map(link => (
         <a href={link.href} class={baseClass}>{link.label}</a>
       ))}
