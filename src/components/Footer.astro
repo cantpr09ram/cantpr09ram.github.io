@@ -3,7 +3,7 @@ import { NAME, GITHUB, EMAIL } from "../consts"
 const today = new Date();
 ---
 
-<footer class="text-sm py-10 pl-2">
+<footer class="text-sx pl-2">
     <div class="flex gap-4 mt-4">
 		<a 
 			href={`https://github.com/${GITHUB}`}
@@ -30,5 +30,7 @@ const today = new Date();
 			<p>RSS</p>
 		</a>
 	</div>
-	<p class="pt-2 text-[10px]">&copy; 2022-{today.getFullYear()} {NAME}. Content lincensed unless otherwise stated.</p>
+	<p class="pt-2 text-xs">&copy; 2022-{today.getFullYear()} {NAME}. <a href="/blog">Content</a> licensed unless otherwise stated.</p>
+	<p class="pt-2 text-xs">This Too Shall Pass</p>
+	<p class="text-xs">251</p>
 </footer>
