@@ -20,6 +20,13 @@ export default defineConfig({
 		sitemap(), 
 		react()],
 	markdown: {
+		syntaxHighlight: "shiki",
+		shikiConfig: {
+			themes: {
+				light: "github-light",
+				dark: "github-dark",
+			},
+		},
 		rehypePlugins: [rehypeAdmonitions],
 	},
 	vite: {

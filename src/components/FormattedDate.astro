@@ -4,8 +4,13 @@ interface Props {
 }
 
 const { date } = Astro.props;
+const formattedDate = new Intl.DateTimeFormat("en-US", {
+	month: "short",
+	day: "2-digit",
+	year: "numeric",
+}).format(date);
 ---
 
 <time class="mono-date" datetime={date.toISOString()}>
-  {date.toISOString().split('T')[0]}
+  {formattedDate}
 </time>

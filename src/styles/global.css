@@ -25,6 +25,9 @@
 	--app-text-soft: #374151;
 	--app-text-muted: #6b7280;
 	--app-text-heading: #111827;
+	--code-bg: #f5f5f5;
+	--code-border: #e5e5e5;
+	--code-inline-bg: #f3f4f6;
 }
 
 :root.dark {
@@ -33,6 +36,9 @@
 	--app-text-soft: #e5e7eb;
 	--app-text-muted: #9ca3af;
 	--app-text-heading: #f3f4f6;
+	--code-bg: #18181b;
+	--code-border: #27272a;
+	--code-inline-bg: #27272a;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -89,7 +95,19 @@ pre::-webkit-scrollbar {
 }
 
 .prose pre {
-	@apply bg-neutral-50 dark:bg-neutral-900 rounded-lg overflow-x-auto border border-neutral-200 dark:border-neutral-900 py-2 px-3 text-sm;
+	@apply rounded-lg overflow-x-auto border py-2 px-3 text-sm;
+	background-color: var(--code-bg);
+	border-color: var(--code-border);
+}
+
+.prose pre.astro-code {
+	border-color: var(--code-border);
+}
+
+html.dark .prose pre.astro-code,
+html.dark .prose pre.astro-code span {
+	color: var(--shiki-dark) !important;
+	background-color: var(--shiki-dark-bg) !important;
 }
 
 code {
@@ -97,7 +115,7 @@ code {
 	font-size: 14px;
 	padding: 0.2em 0.4em;
 	border-radius: 0.3em;
-	background-color: var(--color-gray-100);
+	background-color: var(--code-inline-bg);
 }
 
 pre code {
@@ -127,7 +145,7 @@ code:not(pre code) span {
 		font-size: 14px;
 		padding: 0.2em 0.4em;
 		border-radius: 0.3em;
-		background-color: var(--color-zinc-800);
+		background-color: var(--code-inline-bg);
 	}
 
 	code:not(pre code) span {
@@ -145,8 +163,12 @@ pre code span {
 	margin: 0 auto;
 }
 
+.prose {
+	color: var(--app-text-soft);
+}
+
 .prose p {
-	@apply my-4 text-neutral-800 dark:text-neutral-200;
+	@apply my-4;
 }
 
 .prose h1 {
@@ -222,7 +244,7 @@ input[type="email"] {
 }
 
 @theme {
-	--font-sans: "Noto Serif TC", "EB Garamond", serif;
+	--font-sans: "EB Garamond", "Noto Serif TC";
 	--font-mono: "Courier Prime", "Noto Serif TC", monospace;
 }
 

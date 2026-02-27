@@ -19,30 +19,32 @@ const posts = (await getCollection("blog")).sort(
 	</head>
 	<body class="antialiased tracking-tight font-sans">
     <ThemeToggle />
-    <div class="min-h-screen flex flex-col justify-between pt-10 md:pt-8 p-8 bg-[var(--app-bg)] text-[var(--app-text)]">
-      <main class="max-w-[var(--layout-main-max)] mx-auto w-full">
+    <div class="min-h-screen flex flex-col pt-10 md:pt-8 p-8 bg-[var(--app-bg)] text-[var(--app-text)]">
+      <main class="max-w-[var(--layout-main-max)] mx-auto w-full flex flex-col flex-1">
 			<Header />
 			<h1 class="text-2xl pl-2 py-5">Archive</h1>
 			<section class="pl-2">
 				<ul class="space-y-2">
 					{
 					posts.map((post) => (
-						<li class="flex flex-row items-baseline space-x-4">
-						<p class="text-[var(--app-text-muted)] shrink-0 w-30">
-							<FormattedDate date={post.data.pubDate} />
-						</p>
-						<a
-							href={`/blog/${post.id}/`}
-							class="hover:underline"
-						>
-							{post.data.title}
-						</a>
+						<li>
+							<a
+								href={`/blog/${post.id}/`}
+								class="block rounded-md px-1 py-1 hover:bg-zinc-200/30 dark:hover:bg-zinc-700/25"
+							>
+								<p class="text-xs text-[var(--app-text-muted)]">
+									<FormattedDate date={post.data.pubDate} />
+								</p>
+								<p class="text-xl font-semibold text-[var(--app-text-heading)]">
+									{post.data.title}
+								</p>
+								<p class="text-sm text-[var(--app-text-muted)]">{post.data.description}</p>
+							</a>
 						</li>
 					))
 					}
 				</ul>
 			</section>
-			<Footer />
 		</main>
 	</div>
 	</body>

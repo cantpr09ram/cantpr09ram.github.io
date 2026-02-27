@@ -17,14 +17,15 @@ const { title, description, pubDate, updatedDate } = Astro.props;
 
   <body class="antialiased tracking-tight">
     <ThemeToggle />
-    <div class="min-h-screen flex flex-col justify-between pt-10 md:pt-8 p-8 bg-[var(--app-bg)] text-[var(--app-text)]">
-      <main class="max-w-[var(--layout-main-max)] mx-auto w-full">
+    <div class="min-h-screen flex flex-col pt-10 md:pt-8 p-8 bg-[var(--app-bg)] text-[var(--app-text)]">
+      <main class="max-w-[var(--layout-main-max)] mx-auto w-full flex flex-col flex-1">
         <Header />
         <article>
           <div class="mx-auto w-full max-w-[var(--layout-article-max)] px-3 text-[var(--app-text-soft)] py-5">
             <div class="mb-4 py-2 text-left leading-none">
               <h1 class="mb-2 text-3xl font-bold text-[var(--app-text-heading)]">{title}</h1>
-              <div class="mb-2 text-[var(--app-text-muted)]">
+              <p class="mb-2 text-[var(--app-text-muted)]">{description}</p>
+              <div class="mb-2 text-xs text-[var(--app-text-muted)]">
                 <FormattedDate date={pubDate} />
                 {
                   updatedDate && (

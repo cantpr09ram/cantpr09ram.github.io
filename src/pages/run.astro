@@ -15,8 +15,8 @@ const lastRuns = Array.isArray(strava.last_20) ? strava.last_20 : [];
   </head>
   <body class="antialiased tracking-tight">
       <ThemeToggle />
-      <div class="min-h-screen flex flex-col justify-between pt-10 md:pt-8 p-8 bg-[var(--app-bg)] text-[var(--app-text)]">
-      <main class="max-w-[var(--layout-main-max)] mx-auto w-full">
+      <div class="min-h-screen flex flex-col pt-10 md:pt-8 p-8 bg-[var(--app-bg)] text-[var(--app-text)]">
+      <main class="max-w-[var(--layout-main-max)] mx-auto w-full flex flex-col flex-1">
         <Header />
         <section class="pl-2 pb-20">
             <div class="pt-6 items-center justify-center text-lg">
