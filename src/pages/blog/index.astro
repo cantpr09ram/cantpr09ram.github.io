@@ -24,21 +24,20 @@ const posts = (await getCollection("blog", ({ data }) => data.isdrift !== true))
 			<Header />
 			<h1 class="text-2xl pl-2 py-5">Archive</h1>
 			<section class="pl-2">
-				<ul class="space-y-2">
+				<ul class="space-y-1">
 					{
 					posts.map((post) => (
 						<li>
 							<a
 								href={`/blog/${post.id}/`}
-								class="block rounded-md px-1 py-1 hover:bg-zinc-200/30 dark:hover:bg-zinc-700/25"
+								class="block rounded-md px-1 hover:bg-zinc-200/30 dark:hover:bg-zinc-700/25"
 							>
 								<p class="text-xs text-[var(--app-text-muted)]">
 									<FormattedDate date={post.data.pubDate} />
 								</p>
-								<p class="text-xl font-semibold text-[var(--app-text-heading)]">
+								<p class="text-2xl font-semibold text-[var(--app-text-heading)]">
 									{post.data.title}
 								</p>
-								<p class="text-sm text-[var(--app-text-muted)]">{post.data.description}</p>
 							</a>
 						</li>
 					))

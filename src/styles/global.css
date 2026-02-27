@@ -168,7 +168,7 @@ pre code span {
 }
 
 .prose p {
-	@apply my-4;
+	@apply my-5 font-medium leading-relaxed;
 }
 
 .prose h1 {
@@ -200,7 +200,7 @@ pre code span {
 }
 
 .prose blockquote {
-	@apply pl-4 pr-2 py-2 leading-relaxed break-words;
+	@apply border-y border-gray-200 dark:border-gray-700 pl-4 pr-2 py-2 leading-relaxed break-words;
 }
 
 .prose > :first-child {
@@ -237,6 +237,27 @@ input[type="email"] {
 
 .prose tbody tr:last-child {
 	@apply border-b-0;
+}
+
+@media (max-width: 767px) {
+	.prose p,
+	.prose li {
+		font-size: 1.08rem;
+		line-height: 1.9;
+	}
+
+	.prose table {
+		display: block;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		width: max-content;
+		min-width: 100%;
+	}
+
+	.prose th,
+	.prose td {
+		white-space: nowrap;
+	}
 }
 
 .title {
