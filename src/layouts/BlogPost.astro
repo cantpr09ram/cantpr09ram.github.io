@@ -10,18 +10,19 @@ type Props = CollectionEntry<"blog">["data"];
 const { title, description, pubDate, updatedDate } = Astro.props;
 ---
 
+<!doctype html>
 <html lang="en">
   <head>
     <BaseHead title={title} description={description} />
   </head>
 
-  <body class="antialiased tracking-tight">
+  <body class="antialiased tracking-tight font-sans">
     <ThemeToggle />
     <div class="min-h-screen flex flex-col pt-10 md:pt-8 p-8 bg-[var(--app-bg)] text-[var(--app-text)]">
       <main class="max-w-[var(--layout-main-max)] mx-auto w-full flex flex-col flex-1">
         <Header />
         <article>
-          <div class="mx-auto w-full max-w-[var(--layout-article-max)] px-3 text-[var(--app-text-soft)] py-5">
+          <div class="mx-auto w-full max-w-[var(--layout-article-max)] px-1 md:px-3 text-[var(--app-text-soft)] py-5">
             <div class="mb-4 py-2 text-left leading-none">
               <h1 class="mb-2 text-3xl font-bold text-[var(--app-text-heading)]">{title}</h1>
               <p class="mb-2 text-[var(--app-text-muted)]">{description}</p>
