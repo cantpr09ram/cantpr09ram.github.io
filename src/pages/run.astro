@@ -1,7 +1,6 @@
 ---
 import strava from "../data/strava.json";
 import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import ThemeToggle from "../components/ThemeToggle.astro";
@@ -43,7 +42,6 @@ const lastRuns = Array.isArray(strava.last_20) ? strava.last_20 : [];
               </div>
             ) : null}
         </section>
-        <Footer />
       </main>
     </div>
   </body>

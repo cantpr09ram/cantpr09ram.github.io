@@ -200,7 +200,7 @@ pre code span {
 }
 
 .prose blockquote {
-	@apply border-l-4 border-gray-300 pl-4 pr-2 py-2 leading-relaxed break-words shadow;
+	@apply pl-4 pr-2 py-2 leading-relaxed break-words;
 }
 
 .prose > :first-child {

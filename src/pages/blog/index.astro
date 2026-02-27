@@ -7,7 +7,7 @@ import Header from "../../components/Header.astro";
 import ThemeToggle from "../../components/ThemeToggle.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 
-const posts = (await getCollection("blog")).sort(
+const posts = (await getCollection("blog", ({ data }) => data.isdrift !== true)).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
@@ -45,6 +45,7 @@ const posts = (await getCollection("blog")).sort(
 					}
 				</ul>
 			</section>
+			<Footer />
 		</main>
 	</div>
 	</body>
