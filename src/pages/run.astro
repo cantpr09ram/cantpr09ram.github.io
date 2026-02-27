@@ -4,6 +4,7 @@ import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import FormattedDate from "../components/FormattedDate.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
 const lastRuns = Array.isArray(strava.last_20) ? strava.last_20 : [];
 ---
 
@@ -13,8 +14,9 @@ const lastRuns = Array.isArray(strava.last_20) ? strava.last_20 : [];
     <BaseHead title="Run" description="Running Stats" />
   </head>
   <body class="antialiased tracking-tight">
-      <div class="min-h-screen flex flex-col justify-between pt-10 md:pt-8 p-8">
-      <main class="max-w-[60ch] mx-auto w-full">
+      <ThemeToggle />
+      <div class="min-h-screen flex flex-col justify-between pt-10 md:pt-8 p-8 bg-[var(--app-bg)] text-[var(--app-text)]">
+      <main class="max-w-[var(--layout-main-max)] mx-auto w-full">
         <Header />
         <section class="pl-2 pb-20">
             <div class="pt-6 items-center justify-center text-lg">
@@ -23,12 +25,12 @@ const lastRuns = Array.isArray(strava.last_20) ? strava.last_20 : [];
                 </div>
             </div>
             {lastRuns.length > 0 ? (
-              <div class="pt-8 max-w-[30ch]">
+              <div class="pt-8 max-w-[var(--layout-narrow-max)]">
                 <ul class="mt-2 space-y-1">
                   {lastRuns.map((run) => (
                     <li class="flex items-start justify-between gap-2 border-zinc-200/60 dark:border-zinc-800">
                       <div class="flex flex-col">
-                        <div class="text-sm text-gray-500 dark:text-zinc-400">
+                        <div class="text-sm text-[var(--app-text-muted)]">
                           <FormattedDate date={new Date(run.date_iso ?? run.date)} />
                         </div>
                       </div>

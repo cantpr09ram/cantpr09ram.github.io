@@ -4,6 +4,7 @@ import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import Header from "../components/Header.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 const { title, description, pubDate, updatedDate } = Astro.props;
@@ -12,25 +13,18 @@ const { title, description, pubDate, updatedDate } = Astro.props;
 <html lang="en">
   <head>
     <BaseHead title={title} description={description} />
-    <!-- no-FOUC theme init -->
-    <script is:inline>
-      (() => {
-        const ls = localStorage.getItem('theme');
-        const sys = matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.classList.toggle('dark', ls ? ls === 'dark' : sys);
-      })();
-    </script>
   </head>
 
   <body class="antialiased tracking-tight">
-    <div class="min-h-screen flex flex-col justify-between pt-10 md:pt-8 p-8 dark:bg-zinc-900 bg-white text-gray-900 dark:text-zinc-200">
-      <main class="max-w-[60ch] mx-auto w-full">
+    <ThemeToggle />
+    <div class="min-h-screen flex flex-col justify-between pt-10 md:pt-8 p-8 bg-[var(--app-bg)] text-[var(--app-text)]">
+      <main class="max-w-[var(--layout-main-max)] mx-auto w-full">
         <Header />
         <article>
-          <div class="mx-auto w-full max-w-[720px] px-3 text-gray-700 dark:text-gray-200 py-5">
+          <div class="mx-auto w-full max-w-[var(--layout-article-max)] px-3 text-[var(--app-text-soft)] py-5">
             <div class="mb-4 py-2 text-left leading-none">
-              <h1 class="mb-2 text-3xl font-bold text-gray-900 dark:text-gray-100">{title}</h1>
-              <div class="mb-2 text-gray-500 dark:text-gray-400">
+              <h1 class="mb-2 text-3xl font-bold text-[var(--app-text-heading)]">{title}</h1>
+              <div class="mb-2 text-[var(--app-text-muted)]">
                 <FormattedDate date={pubDate} />
                 {
                   updatedDate && (

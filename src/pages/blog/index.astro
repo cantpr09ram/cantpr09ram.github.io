@@ -4,6 +4,7 @@ import BaseHead from "../../components/BaseHead.astro";
 import Footer from "../../components/Footer.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
 import Header from "../../components/Header.astro";
+import ThemeToggle from "../../components/ThemeToggle.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 
 const posts = (await getCollection("blog")).sort(
@@ -17,8 +18,9 @@ const posts = (await getCollection("blog")).sort(
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body class="antialiased tracking-tight font-sans">
-    <div class="min-h-screen flex flex-col justify-between pt-10 md:pt-8 p-8">
-      <main class="max-w-[60ch] mx-auto w-full">
+    <ThemeToggle />
+    <div class="min-h-screen flex flex-col justify-between pt-10 md:pt-8 p-8 bg-[var(--app-bg)] text-[var(--app-text)]">
+      <main class="max-w-[var(--layout-main-max)] mx-auto w-full">
 			<Header />
 			<h1 class="text-2xl pl-2 py-5">Archive</h1>
 			<section class="pl-2">
@@ -26,7 +28,7 @@ const posts = (await getCollection("blog")).sort(
 					{
 					posts.map((post) => (
 						<li class="flex flex-row items-baseline space-x-4">
-						<p class="text-gray-500 shrink-0 w-30">
+						<p class="text-[var(--app-text-muted)] shrink-0 w-30">
 							<FormattedDate date={post.data.pubDate} />
 						</p>
 						<a

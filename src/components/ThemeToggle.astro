@@ -1,0 +1,54 @@
+---
+import { Moon, Sun, TvMinimal } from "@lucide/astro";
+---
+
+<div class="fixed right-5 top-5 z-50">
+	<div class="theme-toggle rounded-full bg-[var(--app-bg)] p-1">
+		<button
+			type="button"
+			class="theme-toggle-btn rounded-full p-2 text-[var(--app-text)] transition-colors hover:bg-zinc-200/50 dark:hover:bg-zinc-700/50"
+			aria-label="Theme toggle"
+			title="Theme"
+		>
+			<span data-theme-icon="light"><Sun size={16} /></span>
+			<span data-theme-icon="dark" hidden><Moon size={16} /></span>
+			<span data-theme-icon="system" hidden><TvMinimal size={16} /></span>
+		</button>
+	</div>
+</div>
+
+<script is:inline>
+	(() => {
+		const theme = window.__theme;
+		const button = document.querySelector(".theme-toggle-btn");
+		const icons = Array.from(document.querySelectorAll("[data-theme-icon]"));
+		if (!theme || !button || !icons.length) {
+			return;
+		}
+		const modes = ["light", "dark", "system"];
+
+		const updateUI = (mode) => {
+			for (const icon of icons) {
+				icon.hidden = icon.dataset.themeIcon !== mode;
+			}
+			const nextTheme = modes[(modes.indexOf(mode) + 1) % modes.length];
+			button.setAttribute("aria-label", `Theme: ${mode}. Click for ${nextTheme}.`);
+			button.title = `Theme: ${mode}`;
+		};
+
+		const select = (mode) => {
+			theme.set(mode);
+			updateUI(mode);
+		};
+
+		button.addEventListener("click", () => {
+			const current = theme.get();
+			const next = modes[(modes.indexOf(current) + 1) % modes.length];
+			select(next);
+		});
+
+		const initial = theme.get();
+		theme.apply(initial);
+		updateUI(initial);
+	})();
+</script>
