@@ -3,12 +3,12 @@ import { NAME, GITHUB, EMAIL } from "../consts"
 const today = new Date();
 ---
 
-<footer class="text-sx pl-2">
+<footer class="text-xs pl-2 mt-auto pt-6">
     <div class="flex gap-4 mt-4">
 		<a 
 			href={`https://github.com/${GITHUB}`}
 			target="_blank" 
-			class="text-white hover:text-gray-400 hover:underline"
+			class="text-[var(--app-text)] hover:text-[var(--app-text-muted)] hover:underline"
 			rel="noopener noreferrer"
 		>
 			<p>GitHub</p>
@@ -16,7 +16,7 @@ const today = new Date();
 		<a 
 			href={`mailto:${EMAIL}`}
 			target="_blank" 
-			class="text-white hover:text-gray-400 hover:underline"
+			class="text-[var(--app-text)] hover:text-[var(--app-text-muted)] hover:underline"
 			rel="noopener noreferrer"
 		>
 			<p>Email</p>
@@ -24,13 +24,13 @@ const today = new Date();
 		<a 
 			href="/rss.xml" 
 			target="_blank" 
-			class="text-white hover:text-gray-400 hover:underline"
+			class="text-[var(--app-text)] hover:text-[var(--app-text-muted)] hover:underline"
 			rel="noopener noreferrer"
 		>
 			<p>RSS</p>
 		</a>
 	</div>
-	<p class="pt-2 text-xs">&copy; 2022-{today.getFullYear()} {NAME}. <a href="/blog">Content</a> licensed unless otherwise stated.</p>
+	<p class="pt-2 text-xs">&copy; {today.getFullYear()} {NAME}. All rights reserved.</p>
 	<p class="pt-2 text-xs">This Too Shall Pass</p>
 	<p class="text-xs">251</p>
 </footer>

@@ -15,11 +15,18 @@ export default defineConfig({
 	integrations: [
 		mdx({
 			remarkPlugins: [remarkMath],
-			rehypePlugins: [rehypeKatex],
+			rehypePlugins: [rehypeKatex, rehypeAdmonitions],
 		}), 
 		sitemap(), 
 		react()],
 	markdown: {
+		syntaxHighlight: "shiki",
+		shikiConfig: {
+			themes: {
+				light: "github-light",
+				dark: "github-dark",
+			},
+		},
 		rehypePlugins: [rehypeAdmonitions],
 	},
 	vite: {

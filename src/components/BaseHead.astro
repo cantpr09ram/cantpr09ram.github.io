@@ -30,6 +30,44 @@ const { title, description, image = FallbackImage } = Astro.props;
 />
 <meta name="generator" content={Astro.generator} />
 
+<script is:inline>
+	(() => {
+		const key = "theme";
+		const root = document.documentElement;
+		const media = matchMedia("(prefers-color-scheme: dark)");
+		const valid = new Set(["light", "dark", "system"]);
+		const getSaved = () => {
+			const value = localStorage.getItem(key);
+			return valid.has(value) ? value : "system";
+		};
+		const resolve = (theme) =>
+			theme === "system" ? (media.matches ? "dark" : "light") : theme;
+		const apply = (theme) => {
+			root.classList.toggle("dark", resolve(theme) === "dark");
+			root.dataset.theme = theme;
+		};
+		const setTheme = (theme) => {
+			const next = valid.has(theme) ? theme : "system";
+			localStorage.setItem(key, next);
+			apply(next);
+		};
+
+		window.__theme = { get: getSaved, set: setTheme, apply };
+
+		apply(getSaved());
+		const syncSystem = () => {
+			if (getSaved() === "system") {
+				apply("system");
+			}
+		};
+		if (typeof media.addEventListener === "function") {
+			media.addEventListener("change", syncSystem);
+		} else {
+			media.addListener(syncSystem);
+		}
+	})();
+</script>
+
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 

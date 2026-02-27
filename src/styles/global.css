@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=EB+Garamond:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 @import "./admonition.css";
 @import "katex/dist/katex.min.css";
@@ -15,6 +16,29 @@
 	--sh-jsxliterals: #7aa2f7;
 	--sh-property: #73daca;
 	--sh-entity: #e0af68;
+	--layout-main-max: 72ch;
+	--layout-article-max: 880px;
+	--layout-narrow-max: 42ch;
+	--layout-anchor-max: 860px;
+	--app-bg: #ffffff;
+	--app-text: #111827;
+	--app-text-soft: #374151;
+	--app-text-muted: #6b7280;
+	--app-text-heading: #111827;
+	--code-bg: #f5f5f5;
+	--code-border: #e5e5e5;
+	--code-inline-bg: #f3f4f6;
+}
+
+:root.dark {
+	--app-bg: #18181b;
+	--app-text: #e4e4e7;
+	--app-text-soft: #e5e7eb;
+	--app-text-muted: #9ca3af;
+	--app-text-heading: #f3f4f6;
+	--code-bg: #18181b;
+	--code-border: #27272a;
+	--code-inline-bg: #27272a;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -40,7 +64,7 @@ html {
 	margin-left: -1em;
 	padding-right: 0.5em;
 	width: 80%;
-	max-width: 700px;
+	max-width: var(--layout-anchor-max);
 	cursor: pointer;
 }
 
@@ -71,15 +95,27 @@ pre::-webkit-scrollbar {
 }
 
 .prose pre {
-	@apply bg-neutral-50 dark:bg-neutral-900 rounded-lg overflow-x-auto border border-neutral-200 dark:border-neutral-900 py-2 px-3 text-sm;
+	@apply rounded-lg overflow-x-auto border py-2 px-3 text-sm;
+	background-color: var(--code-bg);
+	border-color: var(--code-border);
+}
+
+.prose pre.astro-code {
+	border-color: var(--code-border);
+}
+
+html.dark .prose pre.astro-code,
+html.dark .prose pre.astro-code span {
+	color: var(--shiki-dark) !important;
+	background-color: var(--shiki-dark-bg) !important;
 }
 
 code {
-	font-family: "Menlo", "Monaco", "Courier New", monospace;
+	font-family: var(--font-mono);
 	font-size: 14px;
 	padding: 0.2em 0.4em;
 	border-radius: 0.3em;
-	background-color: var(--color-gray-100);
+	background-color: var(--code-inline-bg);
 }
 
 pre code {
@@ -105,11 +141,11 @@ code:not(pre code) span {
 
 @media (prefers-color-scheme: dark) {
 	code {
-		font-family: "Menlo", "Monaco", "Courier New", monospace;
+		font-family: var(--font-mono);
 		font-size: 14px;
 		padding: 0.2em 0.4em;
 		border-radius: 0.3em;
-		background-color: var(--color-zinc-800);
+		background-color: var(--code-inline-bg);
 	}
 
 	code:not(pre code) span {
@@ -127,8 +163,12 @@ pre code span {
 	margin: 0 auto;
 }
 
+.prose {
+	color: var(--app-text-soft);
+}
+
 .prose p {
-	@apply my-4 text-neutral-800 dark:text-neutral-200;
+	@apply my-5 font-medium leading-relaxed;
 }
 
 .prose h1 {
@@ -160,7 +200,7 @@ pre code span {
 }
 
 .prose blockquote {
-	@apply border-l-4 border-gray-300 pl-4 pr-2 py-2 leading-relaxed break-words shadow;
+	@apply border-y border-gray-200 dark:border-gray-700 pl-4 pr-2 py-2 leading-relaxed break-words;
 }
 
 .prose > :first-child {
@@ -179,6 +219,7 @@ input[type="email"] {
 
 .prose table {
 	@apply my-4 w-full border-collapse text-left;
+	font-family: var(--font-mono);
 }
 
 .prose th,
@@ -198,16 +239,38 @@ input[type="email"] {
 	@apply border-b-0;
 }
 
+@media (max-width: 767px) {
+	.prose p,
+	.prose li {
+		font-size: 1.08rem;
+		line-height: 1.9;
+	}
+
+	.prose table {
+		display: block;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		width: max-content;
+		min-width: 100%;
+	}
+
+	.prose th,
+	.prose td {
+		white-space: nowrap;
+	}
+}
+
 .title {
 	text-wrap: balance;
 }
 
 @theme {
-	--font-sans: "Noto Sans TC", "Inter", ui-sans-serif, system-ui, sans-serif;
+	--font-sans: "EB Garamond", "Noto Serif TC";
+	--font-mono: "Courier Prime", "Noto Serif TC", monospace;
 }
 
 .mono-date {
-	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+	font-family: var(--font-mono);
 }
 
 @layer components {

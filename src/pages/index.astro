@@ -1,7 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import { SITE_DESCRIPTION, SITE_TITLE , GITHUB} from "../consts";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import { SITE_DESCRIPTION, SITE_TITLE , GITHUB, EMAIL} from "../consts";
 ---
 
 <!doctype html>
@@ -10,21 +10,27 @@ import { SITE_DESCRIPTION, SITE_TITLE , GITHUB} from "../consts";
         <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     </head>
     <body class="antialiased tracking-tight">
+        <ThemeToggle />
         <div
-            class="min-h-screen flex flex-col pt-10 md:pt-8 p-8 dark:bg-zinc-900 bg-white text-gray-900 dark:text-zinc-200"
+            class="min-h-screen flex flex-col pt-10 md:pt-8 p-8 bg-[var(--app-bg)] text-[var(--app-text)]"
         >
-            <main class="flex-1 max-w-[60ch] mx-auto w-full flex flex-col justify-center">
-                <div>
-                    <h1 class="text-2xl pl-3 pb-2">
-                    <a class="hover:text-gray-400 hover:underline" rel="noopener noreferrer" href={`https://github.com/${GITHUB}`}>Craftsman</a>
-                     / <a class="hover:text-gray-400 hover:underline" href="/run">Runner</a>
-                     / Student
-                    </h1> 
+			<main class="flex-1 max-w-[var(--layout-main-max)] mx-auto w-full flex flex-col justify-center -mt-6 md:-mt-10">
+				<div class="text-2xl pl-3 pb-2 space-y-4">
+                    <h1>
+                        Hi, I’m cantp09rma — designed by probability, assembled in Taiwan.
+                    </h1>
+					<h1>
+						A student by day, a <a class="text-[var(--app-text-muted)] hover:text-[var(--app-text)] hover:underline" href="/run">runner</a> in the mornings and evenings, and a craftsman in free time.
+					</h1>
+					<h1>
+						Feel free to read my 
+						<a class="text-[var(--app-text-muted)] hover:text-[var(--app-text)] hover:underline" href="/blog">writing</a>
+						, explore my 
+						<a class="text-[var(--app-text-muted)] hover:text-[var(--app-text)] hover:underline" rel="noopener noreferrer" href={`https://github.com/${GITHUB}`}>projects</a>
+						, or say <a class="text-[var(--app-text-muted)] hover:text-[var(--app-text)] hover:underline" rel="noopener noreferrer" href={`mailto:${EMAIL}`}>hello</a>.
+					</h1>
                 </div>
             </main>
-            <div class="max-w-[60ch] mx-auto w-full">
-                <Footer />
-            </div>
         </div>
     </body>
 </html>
