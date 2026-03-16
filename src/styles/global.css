@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=EB+Garamond:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
+@variant dark (&:where(.dark, .dark *));
 @import "./admonition.css";
 @import "katex/dist/katex.min.css";
 ::selection {
