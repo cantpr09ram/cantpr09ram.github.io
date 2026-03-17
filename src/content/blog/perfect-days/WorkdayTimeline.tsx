@@ -3,12 +3,11 @@
 import { useState } from "react"
 
 export interface TimeSlot {
-  id: string
   startTime: string
   endTime: string
   label: string
   description?: string
-  period: "night" | "morning" | "afternoon" | "evening"
+  period: "work" | "life" | "personal"
 }
 
 export interface WorkdayTimelineProps {
@@ -19,127 +18,88 @@ export interface WorkdayTimelineProps {
 
 const DEFAULT_SLOTS: TimeSlot[] = [
   {
-    id: "0a",
-    startTime: "0:00",
-    endTime: "7:00",
-    label: "Sleep",
-    description: "Rest and recovery",
-    period: "night",
+    startTime: "00:00",
+    endTime: "6:00",
+    label: "睡覺",
+    description: "我知道我的睡眠時間有點少，不過我個人認為還好。我真的累到不行我會提早睡，例如從21:00 開始睡覺",
+    period: "life",
   },
   {
-    id: "1",
-    startTime: "7:00",
+    startTime: "6:30",
     endTime: "8:00",
     label: "Morning Routine",
-    description: "Exercise, breakfast, and prep",
-    period: "morning",
+    description: "起床盥洗。開電腦看美股(其實也沒有多少錢)。然後看昨天還沒看完的東西一邊運動，最近在挑戰每天拉單槓。泡咖啡，如果天氣熱的話會沖冷水澡。洗衣服，打掃一下",
+    period: "personal",
   },
   {
-    id: "2",
     startTime: "8:00",
-    endTime: "9:30",
-    label: "Deep Work",
-    description: "Focused coding or writing session",
-    period: "morning",
+    endTime: "9:00",
+    label: "緩衝",
+    description: "其實到公司或是到學校我都只需要大概 20 分鐘，不過我會預留時間來應對突發狀況",
+    period: "life",
   },
   {
-    id: "3",
-    startTime: "9:30",
-    endTime: "10:00",
-    label: "Standup",
-    description: "Team sync and daily planning",
-    period: "morning",
-  },
-  {
-    id: "4",
-    startTime: "10:00",
+    startTime: "9:00",
     endTime: "12:00",
-    label: "Deep Work",
-    description: "Project work, no interruptions",
-    period: "morning",
+    label: "上工",
+    description: "以前就是去上課，沒課就是去圖書館待著。最近就是去公司上班。",
+    period: "work",
   },
   {
-    id: "5",
     startTime: "12:00",
     endTime: "13:00",
     label: "Lunch Break",
-    description: "Walk, rest, and recharge",
-    period: "afternoon",
+    description: "有時候沒事會提早吃，在學校的話我會吃學餐的自助餐或是旁邊的早餐店。如果下午有硬仗的話我會再喝咖啡。",
+    period: "life",
   },
   {
-    id: "6",
     startTime: "13:00",
-    endTime: "14:30",
-    label: "Meetings",
-    description: "1:1s, reviews, and collaboration",
-    period: "afternoon",
+    endTime: "18:00",
+    label: "上工",
+    description: "跟早上一樣，第二輪",
+    period: "work",
   },
   {
-    id: "7",
-    startTime: "14:30",
-    endTime: "16:30",
-    label: "Shallow Work",
-    description: "Email, docs, code reviews",
-    period: "afternoon",
-  },
-  {
-    id: "8",
-    startTime: "16:30",
-    endTime: "17:00",
-    label: "Wind Down",
-    description: "Wrap up tasks and plan tomorrow",
-    period: "afternoon",
-  },
-  {
-    id: "9",
-    startTime: "17:00",
+    startTime: "18:00",
     endTime: "19:00",
-    label: "Personal Time",
-    description: "Hobbies, reading, or side projects",
-    period: "evening",
+    label: "緩衝",
+    description: "把手邊的事做個收尾，跟別人聊天，星期一的話回家煮飯",
+    period: "life",
   },
   {
-    id: "10",
     startTime: "19:00",
-    endTime: "21:00",
-    label: "Evening",
-    description: "Dinner, family time, relaxation",
-    period: "evening",
+    endTime: "20:00",
+    label: "跑步",
+    description: "以前是一個星期跑兩到三天，最近的目標是盡可能每天 10 km",
+    period: "personal",
   },
   {
-    id: "0b",
-    startTime: "21:00",
-    endTime: "24:00",
-    label: "Sleep",
-    description: "Rest and recovery",
-    period: "night",
+    startTime: "20:00",
+    endTime: "0:00",
+    label: "Evening",
+    description: "吃飯、洗澡、個人時間",
+    period: "life",
   },
 ]
 
 const PERIOD_META = {
-  night: {
-    label: "Night",
+  life: {
+    label: "Life",
     barClass: "bg-neutral-200 dark:bg-neutral-700",
     badgeClass: "bg-neutral-200 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300",
     dotClass: "bg-neutral-200 dark:bg-neutral-700",
   },
-  morning: {
-    label: "Morning",
+  work: {
+    label: "Work",
     barClass: "bg-neutral-900 dark:bg-neutral-100",
     badgeClass: "bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900",
     dotClass: "bg-neutral-900 dark:bg-neutral-100",
   },
-  afternoon: {
-    label: "Afternoon",
+  personal: {
+    label: "Personal",
     barClass: "bg-neutral-500",
     badgeClass: "bg-neutral-500 text-white",
     dotClass: "bg-neutral-500",
-  },
-  evening: {
-    label: "Evening",
-    barClass: "bg-neutral-300 dark:bg-neutral-600",
-    badgeClass: "bg-neutral-300 dark:bg-neutral-600 text-neutral-900 dark:text-neutral-100",
-    dotClass: "bg-neutral-300 dark:bg-neutral-600",
   },
 }
 
@@ -162,27 +122,31 @@ function SlotBar({
   onClick: () => void
 }) {
   const start = timeToMinutes(slot.startTime)
-  const end = timeToMinutes(slot.endTime)
-  const leftPct = (start / DAY_DURATION) * 100
-  const widthPct = ((end - start) / DAY_DURATION) * 100
+  const end = timeToMinutes(slot.endTime === "24:00" ? "0:00" : slot.endTime) || DAY_DURATION
   const meta = PERIOD_META[slot.period]
+  const barClass = `mx-px h-full rounded-sm transition-all duration-200 ${meta.barClass} ${isActive ? "opacity-100 scale-y-110" : "opacity-80 group-hover:opacity-100"}`
+
+  const wraps = end !== DAY_DURATION && end < start
+  const segments = wraps
+    ? [{ left: (start / DAY_DURATION) * 100, width: ((DAY_DURATION - start) / DAY_DURATION) * 100 },
+       { left: 0, width: (end / DAY_DURATION) * 100 }]
+    : [{ left: (start / DAY_DURATION) * 100, width: ((end - start) / DAY_DURATION) * 100 }]
 
   return (
-    <button
-      onClick={onClick}
-      aria-pressed={isActive}
-      aria-label={`${slot.label}, ${slot.startTime} to ${slot.endTime}`}
-      className="absolute top-0 h-full group focus:outline-none"
-      style={{ left: `${leftPct}%`, width: `${widthPct}%` }}
-    >
-      <div
-        className={`
-          mx-px h-full rounded-sm transition-all duration-200
-          ${meta.barClass}
-          ${isActive ? "opacity-100 scale-y-110" : "opacity-80 group-hover:opacity-100"}
-        `}
-      />
-    </button>
+    <>
+      {segments.map((seg, i) => (
+        <button
+          key={i}
+          onClick={onClick}
+          aria-pressed={isActive}
+          aria-label={`${slot.label}, ${slot.startTime} to ${slot.endTime}`}
+          className="absolute top-0 h-full group focus:outline-none"
+          style={{ left: `${seg.left}%`, width: `${seg.width}%` }}
+        >
+          <div className={barClass} />
+        </button>
+      ))}
+    </>
   )
 }
 
@@ -205,15 +169,15 @@ function HourTick({ hour }: { hour: number }) {
 
 export function WorkdayTimeline({
   slots = DEFAULT_SLOTS,
-  title = "My Workday",
+  title = "我的一天",
   date,
 }: WorkdayTimelineProps) {
-  const [activeId, setActiveId] = useState<string | null>(slots[0]?.id ?? null)
-  const activeSlot = slots.find((s) => s.id === activeId) ?? null
+  const [activeId, setActiveId] = useState<string | null>(slots[0]?.startTime ?? null)
+  const activeSlot = slots.find((s) => s.startTime === activeId) ?? null
 
   const ticks = [0, 3, 6, 9, 12, 15, 18, 21]
 
-  const periods = (["night", "morning", "afternoon", "evening"] as const).map((p) => ({
+  const periods = (["life", "work", "personal"] as const).map((p) => ({
     period: p,
     meta: PERIOD_META[p],
   }))
@@ -247,10 +211,10 @@ export function WorkdayTimeline({
         <div className="relative h-7 w-full rounded-sm bg-neutral-100 dark:bg-neutral-800">
           {slots.map((slot) => (
             <SlotBar
-              key={slot.id}
+              key={slot.startTime}
               slot={slot}
-              isActive={activeId === slot.id}
-              onClick={() => setActiveId(activeId === slot.id ? null : slot.id)}
+              isActive={activeId === slot.startTime}
+              onClick={() => setActiveId(activeId === slot.startTime ? null : slot.startTime)}
             />
           ))}
         </div>
@@ -282,7 +246,7 @@ export function WorkdayTimeline({
           {slots.map((slot) => {
             const meta = PERIOD_META[slot.period]
             return (
-              <li key={slot.id} className="flex items-start gap-2 py-2">
+              <li key={slot.startTime} className="flex items-start gap-2 py-2">
                 <span className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${meta.dotClass}`} aria-hidden="true" />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-neutral-900 dark:text-neutral-100">{slot.label}</p>
