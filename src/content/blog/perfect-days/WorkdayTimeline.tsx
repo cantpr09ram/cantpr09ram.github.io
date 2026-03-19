@@ -76,8 +76,8 @@ const DEFAULT_SLOTS: TimeSlot[] = [
   {
     startTime: "20:00",
     endTime: "0:00",
-    label: "Evening",
-    description: "吃飯、洗澡、個人時間",
+    label: "個人時間",
+    description: "吃飯、洗澡、個人時間 (讀書、side project)",
     period: "life",
   },
 ]
@@ -232,35 +232,12 @@ export function WorkdayTimeline({
             <span className="block text-sm font-semibold text-neutral-900 dark:text-neutral-100 leading-none">{activeSlot.label}</span>
             <span className="block mt-2 text-xs font-mono text-neutral-400 dark:text-neutral-500 leading-none">{activeSlot.startTime} – {activeSlot.endTime}</span>
             {activeSlot.description && (
-              <span className="block mt-0.5 text-xs text-neutral-500 dark:text-neutral-400 leading-none">{activeSlot.description}</span>
+              <span className="block mt-0.5 text-xs text-neutral-900 dark:text-neutral-100 leading-none">{activeSlot.description}</span>
             )}
           </div>
         ) : (
           <p className="text-xs text-neutral-400 dark:text-neutral-500 italic">Click a segment.</p>
         )}
-      </div>
-
-      {/* Mobile list */}
-      <div className="mt-3 sm:hidden" aria-label="All time slots">
-        <ol className="divide-y divide-neutral-100 dark:divide-neutral-800">
-          {slots.map((slot) => {
-            const meta = PERIOD_META[slot.period]
-            return (
-              <li key={slot.startTime} className="flex items-start gap-2 py-2">
-                <span className={`mt-1.5 h-2 w-2 shrink-0 rounded-full ${meta.dotClass}`} aria-hidden="true" />
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm text-neutral-900 dark:text-neutral-100">{slot.label}</p>
-                  <p className="text-xs font-mono text-neutral-400 dark:text-neutral-500">
-                    {slot.startTime} – {slot.endTime}
-                  </p>
-                  {slot.description && (
-                    <p className="text-xs text-neutral-500 dark:text-neutral-400">{slot.description}</p>
-                  )}
-                </div>
-              </li>
-            )
-          })}
-        </ol>
       </div>
     </figure>
   )
