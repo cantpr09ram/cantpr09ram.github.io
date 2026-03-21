@@ -1,8 +1,14 @@
 {
-  "updated_at": "2026-03-20T22:34:39.447+08:00",
+  "updated_at": "2026-03-21T22:31:11.078+08:00",
   "unit": "km",
-  "total_km": 271.19,
+  "total_km": 292.36,
   "last_20": [
+    {
+      "date": "2026-03-21T18:58:39Z",
+      "date_iso": "2026-03-21T18:58:39.000Z",
+      "distance_km": 21.17,
+      "name": "Evening Run ☁️"
+    },
     {
       "date": "2026-03-19T18:55:54Z",
       "date_iso": "2026-03-19T18:55:54.000Z",
@@ -116,12 +122,6 @@
       "date_iso": "2026-01-29T20:10:28.000Z",
       "distance_km": 9.34,
       "name": "Evening Run"
-    },
-    {
-      "date": "2026-01-25T07:29:15Z",
-      "date_iso": "2026-01-25T07:29:15.000Z",
-      "distance_km": 3.57,
-      "name": "Morning Run"
     }
   ]
 }
