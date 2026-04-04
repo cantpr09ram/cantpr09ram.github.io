@@ -31,7 +31,7 @@ export function RouteMap({ polyline }: { polyline: string }) {
       ).addTo(map);
 
       const polylineLayer = L.polyline(coords, {
-        color: "#ef4444",
+        color: "#111111",
         weight: 2.5,
         opacity: 0.9,
       }).addTo(map);
