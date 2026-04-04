@@ -1,0 +1,148 @@
+---
+title: Google Encoded Polyline
+pubDate: 2026-03-31
+categories: []
+description: ''
+slug: google-encoded-polyline
+---
+
+import { RouteMap } from './route-map.tsx'
+
+export const taipeiMarathon = "ycywCsw}dVAjHc@hIG`GHzKGfZ]hMMbAi@pAIn@Dd@n@|AH`AI`HDlGQhHEfXBhGK`BHzCMzHDrIY~`@AtQ_Dla@SzGTRv@PZ@RQnBkFv@wArBoFf@wAXyA`C_F|@iCnAeB\\CxDfApIfEd@l@}B|GeBjGuCjIcCbJo@xGa@zI[nD{@jGaCxIsArEsBfEqOqCaBOiWsEwAe@{AKcFmA}FcB[QGUBwANwAvAuCz@_E`@c@d]J`CDvE`@~@GZ}@hA}NpA}GY_Ag@_@qL_C{IwAqAa@uJiBmPgG_HsBiDwAoAw@{A[kFg@mCGcL?q_@m@mCLmNpBwHJuCOuJkBoG{AuDa@qDcAyIwAwAo@e@e@eBeDq@_Cu@iBwAs@yDSw@YqDyEgAmBu@{Dc@_JPmGR{AIuABiCl@sVImEBwCn@iV@yEKmCJ{BEkBVuEGkFHsI`@sON_YdAkKf@uDpA_INmCIaMgEiRSeB?uBdAyF|@{AvA_BjCwBlHiDnGkBfFSjBA`BP|@OxB@jC^fJdCzBTvSw@zT_D`Kg@jDa@lCqAhBkBdA{Bd@}BHgCMqAW{@cG{N}No\\uEuL{CwGoBoDm@yB@gB^yAnAgBfCoBv@eAbCoGp@aCFm@NsHdCmLHkDWoPeAmS}@yIuCcO}@uB{CwEyKmJsA_DUaDX_CvAmGhAqBjD{BnE}B~CwBpEsEnB{AnA]zBDaCCoAXmAhBc@tA_C~BgAxAiAx@cI`CaAPWIKg@Pq@tC}F~GmHpDsBTe@K[SEgDbC{DxDqClDuB|DeB|Do@nCg@vCy@jD[rC@bAP`A`@n@rGnFzFlFn@z@bBjDb@rAz@`DNrAj@~AlBdNNxGV~A\\`IKbB`@pLO`CwC|NIfBFlC`@jClBxF@d@rBdClHpHfEtFtGfN|B|MVfAj@fAp@rE`@vA@xBbAdGvF`b@LlFc@bFo@|A}@r@I`@d@IFU_FfBeLtAuF`@eADs@Y}AOiUtB]Fw@n@uAd@oCBmEpBwEd@kF_B_JuEeC}@{HcCmDe@aD`@gAxAUJuIXsATq@d@qA~B_@jAAt@bAjCtBtCvA|CpBtCrCvH~@vDLSLiGSoAI{@@kSDc@RUjANl@d@f@gA\\NhB@dCNdATvKl@rFBv@L\\r@XFdHu@pA@pNoBnLaArCc@|EOlH{@dBEhANtCQ`IwAdAAp@L\\n@PtBBpBOxHIxI{@`yAFRPBzCIXGn@{@fDL"
+
+最近在做這個 [網站](https://run.cantpr09ram.cc/)。簡單來說他的功能就是從 Strava API 獲得我跑步的資料然後用 
+[json](https://github.com/cantpr09ram/running_page/blob/main/src/static/activities.json) 的形式存起來，
+然后透過網站展示這些數據，未來我可能會做一個 AI agent 來做輔助訓練 
+(其實買個 [garmin](https://www.garmin.com.tw/products/intosports/?cat=running) 就有這個功能的)。
+
+處理數據的時候，我就很好奇路徑的資料是如何傳送的。不用猜也知道這個數據是相當龐大的，我在 API respond 看到這個欄位 ```summary_polyline```
+以下是你可能會看到的值
+```bash
+ycywCsw}dVAjHc@hIG`GHzKGfZ]hMMbAi@pAIn@Dd@n@|AH`AI`HDlGQhHEfXBh
+GK`BHzCMzHDrIY~`@AtQ_Dla@SzGTRv@PZ@RQnBkFv@wArBoFf@wAXyA`C_F|@i
+CnAeB\\CxDfApIfEd@l@}B|GeBjGuCjIcCbJo@xGa@zI[nD{@jGaCxIsArEsBfE
+qOqCaBOiWsEwAe@{AKcFmA}FcB[QGUBwANwAvAuCz@_E`@c@d]J`CDvE`@~@GZ}
+@hA}NpA}GY_Ag@_@qL_C{IwAqAa@uJiBmPgG_HsBiDwAoAw@{A[kFg@mCGcL?q_
+@m@mCLmNpBwHJuCOuJkBoG{AuDa@qDcAyIwAwAo@e@e@eBeDq@_Cu@iBwAs@yDS
+w@YqDyEgAmBu@{Dc@_JPmGR{AIuABiCl@sVImEBwCn@iV@yEKmCJ{BEkBVuEGkF
+HsI`@sON_YdAkKf@uDpA_INmCIaMgEiRSeB?uBdAyF|@{AvA_BjCwBlHiDnGkBf
+FSjBA`BP|@OxB@jC^fJdCzBTvSw@zT_D`Kg@jDa@lCqAhBkBdA{Bd@}BHgCMqAW
+{@cG{N}No\\uEuL{CwGoBoDm@yB@gB^yAnAgBfCoBv@eAbCoGp@aCFm@NsHdCmL
+HkDWoPeAmS}@yIuCcO}@uB{CwEyKmJsA_DUaDX_CvAmGhAqBjD{BnE}B~CwBpEs
+EnB{AnA]zBDaCCoAXmAhBc@tA_C~BgAxAiAx@cI`CaAPWIKg@Pq@tC}F~GmHpDs
+BTe@K[SEgDbC{DxDqClDuB|DeB|Do@nCg@vCy@jD[rC@bAP`A`@n@rGnFzFlFn@
+z@bBjDb@rAz@`DNrAj@~AlBdNNxGV~A\\`IKbB`@pLO`CwC|NIfBFlC`@jClBxF
+@d@rBdClHpHfEtFtGfN|B|MVfAj@fAp@rE`@vA@xBbAdGvF`b@LlFc@bFo@|A}@
+r@I`@d@IFU_FfBeLtAuF`@eADs@Y}AOiUtB]Fw@n@uAd@oCBmEpBwEd@kF_B_Ju
+EeC}@{HcCmDe@aD`@gAxAUJuIXsATq@d@qA~B_@jAAt@bAjCtBtCvA|CpBtCrCv
+H~@vDLSLiGSoAI{@@kSDc@RUjANl@d@f@gA\\NhB@dCNdATvKl@rFBv@L\\r@XF
+dHu@pA@pNoBnLaArCc@|EOlH{@dBEhANtCQ`IwAdAAp@L\\n@PtBBpBOxHIxI{@
+`yAFRPBzCIXGn@{@fDL
+```
+由於參考了這個[專案](https://github.com/yihong0618/running_page)， 順藤摸瓜下我看到了這個 [Google Encoded Polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm)
+我實在是太好奇為什麼可以用一段看似亂碼的東西表示一串長度不小的資訊，所以我就好好的研究了一番。
+
+### Google Encoded Polyline
+這個演算法大概的步驟你點開上面的網址就有了，甚至有繁體中文的。不過我還是會說一遍
+1. 把浮點座標變成整數：位元運算只對整數有效，所以我們會乘以 100000 再四捨五入。至於為什麼是這個數字，因為對應的精確度大概是公尺級的，算是一個平衡點。
+
+2. 存差值：這個演算法就是透過指儲存差距的方式來壓縮資料。由於第一個點是沒有差值的，所以就是原本的數字。
+
+3. zigzag encoding：差值可能是正的，也可能是負的，但是下個步驟要做的事必須要在正的情況下才行 所以會左移一位 (乘 2) 然後如果是 負數的話會再取 `NOT`
+最終我們可以把 0, −1, 1, −2, 2, −3, 3… 映射成 0, 1, 2, 3, 4, 5, 6… 
+
+4. 切成 5-bit chunks：從最低有效位（LSB）開始，每 5 個 bit 切一組。
+選 5 bit 是個刻意的權衡：5 bit 能表示 0–31，加上後面會用到的一個「繼續」標記位，剛好湊成 6 bit，對應到 ASCII 可見字元的一段範圍。
+從低位往高位切的原因是為了邊讀邊組，不用等到所有字元都到才開始。
+
+5. 非末尾 chunk 的 bit5 設為 1：這個說法有點太複雜了，簡單來說就是為了判斷何時是下一個數字 我們把前面轉換乘二進位的數字最前面 (第六個bit) 都設成 1 (或這是說 `OR 0x20`），除了最後一位。
+這樣算到如果值小於 32 我們就知道要換了。
+
+6. 加上 63：使結果落在 ASCII 64（?）到 126（~）之間，全部都是可見字元，可以安全地在 URL、JSON 字串、HTTP body 裡傳輸，不會觸發任何控制字元的特殊行為。
+
+反向的話，第二步就看是否小於 32 來決定是否進入下一步
+
+我們就直接進入實戰，嘗試還原上面的東西，我們做幾位就好了
+首先逐字元處理
+| 字元  | ASCII | −63 | 二進位  | bit5  | bit5=繼續? | shift |
+|------|-------|-----|--------|-------|------------|-------|
+| `y`  | 121   | 58  | 111010 | 26    | Y（58≥32） | 0     |
+| `c`  | 99    | 36  | 100100 | 4     | Y（36≥32） | 5     |
+| `y`  | 121   | 58  | 111010 | 26    | Y（58≥32） | 10    |
+| `w`  | 119   | 56  | 111000 | 24    | Y（56≥32） | 15    |
+| `C`  | 67    | 4   | 000100 | 4     | N（4&lt;32)| 20    |
+
+接著按照 chunk 排列 我們會得到
+
+$$
+26 \mathbin{|} (4 \mathbin{<\!\!<} 5) \mathbin{|} (26 \mathbin{<\!\!<} 10) \mathbin{|} (24 \mathbin{<\!\!<} 15) \mathbin{|} (4 \mathbin{<\!\!<} 20) = 5007514
+$$
+
+$$
+5007514 \mathbin{\&} 1 = 0
+$$
+
+$$
+\Delta = 5007514 \mathbin{>\!\!>} 1 = 2503757 \div 10^5 = 25.03757
+$$
+我們接著算下去
+| 字元 | ASCII | −63 | 二進位   | bit5  |bit5繼續?   | shift | 
+|------|-------|-----|--------|-------|----------- |-------|
+| `s`  | 115   | 52  | 110100 | 20    | Y（52≥32） | 0     | 
+| `w`  | 119   | 56  | 111000 | 24    | Y（56≥32） | 5     | 
+| `}`  | 125   | 62  | 111110 | 30    | Y（62≥32） | 10    | 
+| `d`  | 100   | 37  | 100101 | 5     | Y（37≥32） | 15    | 
+| `V`  | 86    | 23  | 010111 | 23    | N（23&lt;32)| 20    | 
+
+$$
+20 \mathbin{|} (24 \mathbin{<\!\!<} 5) \mathbin{|} (30 \mathbin{<\!\!<} 10) \mathbin{|} (5 \mathbin{<\!\!<} 15) \mathbin{|} (23 \mathbin{<\!\!<} 20) = 24312596
+$$
+
+$$
+24312596 \mathbin{\&} 1 = 0
+$$
+
+$$
+\Delta = 24312596 \mathbin{>\!\!>} 1 = 12156298 \div 10^5 = 121.56298
+$$
+
+接下來就是魔法了
+| 字元 | ASCII | −63 | 二進位   | bit5  |bit5繼續?   | shift | 
+|------|-------|-----|--------|-------|-----------|-------|
+| `A`  | 65    | 2   | 000010 | 2     | N（2&lt;32） | 0     | 
+$$
+2 \mathbin{\&} 1 = 0
+$$
+
+$$
+\Delta = 2 \mathbin{>\!\!>} 1 = 1
+$$
+
+$$
+\Delta + 2503757 \div 10^5 = 25.03758
+$$
+
+| P | lat_chars | lng_chars | Δlat | Δlng | latitude | longitude |
+|---|-----------|-----------|------|------|----------|-----------|
+| P1 | `ycywC` | `sw}dV` | +2503757 | +12156298 | 25.03757 | 121.56298 |
+| P2 | `A` | `jH` | +1 | −150 | 25.03758 | 121.56148 |
+| P3 | `c@` | `hI` | +18 | −165 | 25.03776 | 121.55983 |
+| P4 | `G` | `G` | +4 | +4 | 25.03780 | 121.55987 |
+| P5 | `H` | `zK` | −5 | −206 | 25.03775 | 121.55781 |
+| P6 | `G` | `fZ` | +4 | −436 | 25.03779 | 121.55345 |
+
+
+
+我們把 (25.03757, 121.56298) 輸入到 [google maps](https://www.google.com/maps?q=25.03757,121.56298) 可以看到是在仁愛路四段 台北市政府前廣場附近，
+沒錯，上面的路面是台北馬拉松的路線
+
+<RouteMap
+  polyline={taipeiMarathon}
+  client:load
+/>
+
+如果你只是想知道 ployline 是如何運作的，到這這裡就說完了，接下來是一些不一樣的主題
+
+> [!NOTE]
+> 我覺得這段值得擴充成一篇獨立的文章，所以我先刪掉了。等我寫好我會補上 link
+

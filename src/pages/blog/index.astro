@@ -30,7 +30,7 @@ const posts = (await getCollection("blog", ({ data }) => data.isdrift !== true))
 						<li>
 							<a
 								href={`/blog/${post.id}/`}
-								class="block rounded-md px-1 hover:bg-zinc-200/30 dark:hover:bg-zinc-700/25"
+								class="block rounded-md px-1"
 							>
 								<p class="text-xs text-[var(--app-text-muted)]">
 									<FormattedDate date={post.data.pubDate} />
