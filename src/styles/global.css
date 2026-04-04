@@ -3,6 +3,12 @@
 @variant dark (&:where(.dark, .dark *));
 @import "./admonition.css";
 @import "katex/dist/katex.min.css";
+
+.katex-display {
+	overflow-x: auto;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
+}
 ::selection {
 	background-color: #47a3f3;
 	color: #fefefe;
@@ -228,8 +234,15 @@ input[type="email"] {
 }
 
 .prose table {
-	@apply my-4 w-full border-collapse text-left;
+	border-collapse: collapse;
+	text-align: left;
+	display: block;
+	overflow-x: auto;
+	width: fit-content;
+	max-width: 100%;
+	margin: 1rem auto;
 	font-family: var(--font-mono);
+	-webkit-overflow-scrolling: touch;
 }
 
 .prose th,
@@ -252,13 +265,6 @@ input[type="email"] {
 @media (max-width: 767px) {
 	.prose img {
 		max-width: 92%;
-	}
-
-	.prose table {
-		display: block;
-		max-width: 100%;
-		overflow-x: auto;
-		-webkit-overflow-scrolling: touch;
 	}
 
 	.prose th,
