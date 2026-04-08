@@ -2,7 +2,7 @@
 title: How Google Encoded Polyline works
 pubDate: 2026-03-31
 categories: []
-description: ''
+description: 'Finding Order in Chaos'
 slug: google-encoded-polyline
 ---
 
@@ -18,26 +18,7 @@ export const taipeiMarathon = "ycywCsw}dVAjHc@hIG`GHzKGfZ]hMMbAi@pAIn@Dd@n@|AH`A
 處理數據的時候，我就很好奇路徑的資料是如何傳送的。不用猜也知道這個數據是相當龐大的，我在 API response 看到這個欄位 ```summary_polyline```
 以下是你可能會看到的值
 ```bash
-ycywCsw}dVAjHc@hIG`GHzKGfZ]hMMbAi@pAIn@Dd@n@|AH`AI`HDlGQhHEfXBh
-GK`BHzCMzHDrIY~`@AtQ_Dla@SzGTRv@PZ@RQnBkFv@wArBoFf@wAXyA`C_F|@i
-CnAeB\\CxDfApIfEd@l@}B|GeBjGuCjIcCbJo@xGa@zI[nD{@jGaCxIsArEsBfE
-qOqCaBOiWsEwAe@{AKcFmA}FcB[QGUBwANwAvAuCz@_E`@c@d]J`CDvE`@~@GZ}
-@hA}NpA}GY_Ag@_@qL_C{IwAqAa@uJiBmPgG_HsBiDwAoAw@{A[kFg@mCGcL?q_
-@m@mCLmNpBwHJuCOuJkBoG{AuDa@qDcAyIwAwAo@e@e@eBeDq@_Cu@iBwAs@yDS
-w@YqDyEgAmBu@{Dc@_JPmGR{AIuABiCl@sVImEBwCn@iV@yEKmCJ{BEkBVuEGkF
-HsI`@sON_YdAkKf@uDpA_INmCIaMgEiRSeB?uBdAyF|@{AvA_BjCwBlHiDnGkBf
-FSjBA`BP|@OxB@jC^fJdCzBTvSw@zT_D`Kg@jDa@lCqAhBkBdA{Bd@}BHgCMqAW
-{@cG{N}No\\uEuL{CwGoBoDm@yB@gB^yAnAgBfCoBv@eAbCoGp@aCFm@NsHdCmL
-HkDWoPeAmS}@yIuCcO}@uB{CwEyKmJsA_DUaDX_CvAmGhAqBjD{BnE}B~CwBpEs
-EnB{AnA]zBDaCCoAXmAhBc@tA_C~BgAxAiAx@cI`CaAPWIKg@Pq@tC}F~GmHpDs
-BTe@K[SEgDbC{DxDqClDuB|DeB|Do@nCg@vCy@jD[rC@bAP`A`@n@rGnFzFlFn@
-z@bBjDb@rAz@`DNrAj@~AlBdNNxGV~A\\`IKbB`@pLO`CwC|NIfBFlC`@jClBxF
-@d@rBdClHpHfEtFtGfN|B|MVfAj@fAp@rE`@vA@xBbAdGvF`b@LlFc@bFo@|A}@
-r@I`@d@IFU_FfBeLtAuF`@eADs@Y}AOiUtB]Fw@n@uAd@oCBmEpBwEd@kF_B_Ju
-EeC}@{HcCmDe@aD`@gAxAUJuIXsATq@d@qA~B_@jAAt@bAjCtBtCvA|CpBtCrCv
-H~@vDLSLiGSoAI{@@kSDc@RUjANl@d@f@gA\\NhB@dCNdATvKl@rFBv@L\\r@XF
-dHu@pA@pNoBnLaArCc@|EOlH{@dBEhANtCQ`IwAdAAp@L\\n@PtBBpBOxHIxI{@
-`yAFRPBzCIXGn@{@fDL
+ycywCsw}dVAjHc@hIG`GHzKGfZ]hMMbAi@pAIn@Dd@n@|AH`AI`HDlGQhHEfXBhGK`BHzCMzHDrIY~`@AtQ_Dla@SzGTRv@PZ@RQnBkFv@wArBoFf@wAXyA`C_F|@iCnAeB\\CxDfApIfEd@l@}B|GeBjGuCjIcCbJo@xGa@zI[nD{@jGaCxIsArEsBfEqOqCaBOiWsEwAe@{AKcFmA}FcB[QGUBwANwAvAuCz@_E`@c@d]J`CDvE`@~@GZ}@hA}NpA}GY_Ag@_@qL_C{IwAqAa@uJiBmPgG_HsBiDwAoAw@{A[kFg@mCGcL?q_@m@mCLmNpBwHJuCOuJkBoG{AuDa@qDcAyIwAwAo@e@e@eBeDq@_Cu@iBwAs@yDSw@YqDyEgAmBu@{Dc@_JPmGR{AIuABiCl@sVImEBwCn@iV@yEKmCJ{BEkBVuEGkFHsI`@sON_YdAkKf@uDpA_INmCIaMgEiRSeB?uBdAyF|@{AvA_BjCwBlHiDnGkBfFSjBA`BP|@OxB@jC^fJdCzBTvSw@zT_D`Kg@jDa@lCqAhBkBdA{Bd@}BHgCMqAW{@cG{N}No\\uEuL{CwGoBoDm@yB@gB^yAnAgBfCoBv@eAbCoGp@aCFm@NsHdCmLHkDWoPeAmS}@yIuCcO}@uB{CwEyKmJsA_DUaDX_CvAmGhAqBjD{BnE}B~CwBpEsEnB{AnA]zBDaCCoAXmAhBc@tA_C~BgAxAiAx@cI`CaAPWIKg@Pq@tC}F~GmHpDsBTe@K[SEgDbC{DxDqClDuB|DeB|Do@nCg@vCy@jD[rC@bAP`A`@n@rGnFzFlFn@z@bBjDb@rAz@`DNrAj@~AlBdNNxGV~A\\`IKbB`@pLO`CwC|NIfBFlC`@jClBxF@d@rBdClHpHfEtFtGfN|B|MVfAj@fAp@rE`@vA@xBbAdGvF`b@LlFc@bFo@|A}@r@I`@d@IFU_FfBeLtAuF`@eADs@Y}AOiUtB]Fw@n@uAd@oCBmEpBwEd@kF_B_JuEeC}@{HcCmDe@aD`@gAxAUJuIXsATq@d@qA~B_@jAAt@bAjCtBtCvA|CpBtCrCvH~@vDLSLiGSoAI{@@kSDc@RUjANl@d@f@gA\\NhB@dCNdATvKl@rFBv@L\\r@XFdHu@pA@pNoBnLaArCc@|EOlH{@dBEhANtCQ`IwAdAAp@L\\n@PtBBpBOxHIxI{@`yAFRPBzCIXGn@{@fDL
 ```
 由於參考了這個[專案](https://github.com/yihong0618/running_page)， 順藤摸瓜下我看到了這個 [Google Encoded Polyline](https://developers.google.com/maps/documentation/utilities/polylinealgorithm)
 我實在是太好奇為什麼可以用一段看似亂碼的東西表示一串長度不小的資訊，所以我就好好的研究了一番。

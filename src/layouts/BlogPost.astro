@@ -6,14 +6,14 @@ import FormattedDate from "../components/FormattedDate.astro";
 import Header from "../components/Header.astro";
 import ThemeToggle from "../components/ThemeToggle.astro";
 
-type Props = CollectionEntry<"blog">["data"];
-const { title, description, pubDate, updatedDate } = Astro.props;
+type Props = CollectionEntry<"blog">["data"] & { slug: string };
+const { title, description, pubDate, updatedDate, slug } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={title} description={description} image={`/og/${slug}.png`} />
   </head>
 
   <body class="antialiased tracking-tight font-sans">

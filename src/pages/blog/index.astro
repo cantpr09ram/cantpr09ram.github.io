@@ -22,21 +22,20 @@ const posts = (await getCollection("blog", ({ data }) => data.isdrift !== true))
     <div class="min-h-screen flex flex-col pt-10 md:pt-8 p-8 bg-[var(--app-bg)] text-[var(--app-text)]">
       <main class="max-w-[var(--layout-main-max)] mx-auto w-full flex flex-col flex-1">
 			<Header />
-			<h1 class="text-2xl pl-2 py-5">Archive</h1>
-			<section class="pl-2">
+			<section class="pl-2 py-5">
 				<ul class="space-y-1">
 					{
 					posts.map((post) => (
 						<li>
 							<a
 								href={`/blog/${post.id}/`}
-								class="block rounded-md px-1"
+								class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 rounded-md px-1 py-0.5"
 							>
-								<p class="text-xs text-[var(--app-text-muted)]">
-									<FormattedDate date={post.data.pubDate} />
-								</p>
-								<p class="text-2xl font-semibold text-[var(--app-text-heading)]">
+								<p class="min-w-0 flex-1 text-lg font-semibold text-[var(--app-text-heading)]">
 									{post.data.title}
+								</p>
+								<p class="shrink-0 text-xs text-[var(--app-text-muted)]">
+									<FormattedDate date={post.data.pubDate} />
 								</p>
 							</a>
 						</li>
