@@ -35,6 +35,9 @@ importers:
       astro-embed:
         specifier: ^0.12.0
         version: 0.12.0(astro@6.1.2(@types/node@24.12.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(tsx@4.21.0)(typescript@5.9.3)(yaml@2.8.2))
+      cobe:
+        specifier: ^2.0.1
+        version: 2.0.1
       consola:
         specifier: ^3.4.2
         version: 3.4.2
@@ -1234,6 +1237,9 @@ packages:
   clsx@2.1.1:
     resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
     engines: {node: '>=6'}
+
+  cobe@2.0.1:
+    resolution: {integrity: sha512-aaa6vcIlaC8C1SF50LDH0Anybo/EAXnrxqe+bwvr4+YUtZydqjeBjTTD7ziCCkbRrRGSns3I3F6cZsf3W+L+ag==}
 
   collapse-white-space@2.1.0:
     resolution: {integrity: sha512-loKTxY1zCOuG4j9f6EPnuyyYkf58RnhhWTvRoZEokgB+WbdXehfjFviyOVYkqzEWz1Q5kRiZdBYS5SwxbQYwzw==}
@@ -3653,6 +3659,8 @@ snapshots:
   ci-info@4.4.0: {}
 
   clsx@2.1.1: {}
+
+  cobe@2.0.1: {}
 
   collapse-white-space@2.1.0: {}
 
