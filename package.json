@@ -21,7 +21,7 @@
 		"@lucide/astro": "^1.7.0",
 		"@resvg/resvg-js": "^2.6.2",
 		"@tailwindcss/vite": "^4.2.2",
-		"astro": "^6.1.2",
+		"astro": "^6.1.6",
 		"astro-embed": "^0.12.0",
 		"cobe": "^2.0.1",
 		"consola": "^3.4.2",
