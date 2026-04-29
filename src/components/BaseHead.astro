@@ -3,6 +3,7 @@
 // all pages through the use of the <BaseHead /> component.
 import "../styles/global.css";
 import type { ImageMetadata } from "astro";
+import { ClientRouter } from "astro:transitions";
 import FallbackImage from "../assets/og-image.png";
 import { SITE_TITLE } from "../consts";
 
@@ -33,9 +34,11 @@ const ogImageUrl =
 	href={new URL('rss.xml', Astro.site)}
 />
 <meta name="generator" content={Astro.generator} />
+<ClientRouter />
 
 <script is:inline>
 	(() => {
+		const previousTheme = window.__theme;
 		const key = "theme";
 		const root = document.documentElement;
 		const media = matchMedia("(prefers-color-scheme: dark)");
@@ -56,19 +59,67 @@ const ogImageUrl =
 			apply(next);
 		};
 
-		window.__theme = { get: getSaved, set: setTheme, apply };
+		const modes = ["light", "dark", "system"];
+		const updateThemeToggle = (button) => {
+			const current = getSaved();
+			const icons = Array.from(button.querySelectorAll("[data-theme-icon]"));
+			for (const icon of icons) {
+				icon.hidden = icon.dataset.themeIcon !== current;
+			}
+			const nextTheme = modes[(modes.indexOf(current) + 1) % modes.length];
+			button.setAttribute("aria-label", `Theme: ${current}. Click for ${nextTheme}.`);
+			button.title = `Theme: ${current}`;
+		};
+		const initThemeToggles = () => {
+			for (const button of document.querySelectorAll(".theme-toggle-btn")) {
+				if (button.dataset.themeToggleBound !== "true") {
+					button.addEventListener("click", () => {
+						const current = getSaved();
+						setTheme(modes[(modes.indexOf(current) + 1) % modes.length]);
+						updateThemeToggle(button);
+					});
+					button.dataset.themeToggleBound = "true";
+				}
+				updateThemeToggle(button);
+			}
+		};
+		const refreshEmbeds = () => {
+			window.twttr?.widgets?.load?.();
+		};
+		const initPage = () => {
+			apply(getSaved());
+			initThemeToggles();
+			refreshEmbeds();
+		};
 
-		apply(getSaved());
+		window.__theme = {
+			get: getSaved,
+			set: setTheme,
+			apply,
+			init: initThemeToggles,
+			__pageLoadBound: previousTheme?.__pageLoadBound === true,
+			__systemBound: previousTheme?.__systemBound === true,
+		};
+
 		const syncSystem = () => {
 			if (getSaved() === "system") {
 				apply("system");
+				initThemeToggles();
 			}
 		};
-		if (typeof media.addEventListener === "function") {
-			media.addEventListener("change", syncSystem);
-		} else {
-			media.addListener(syncSystem);
+		if (!window.__theme.__systemBound) {
+			if (typeof media.addEventListener === "function") {
+				media.addEventListener("change", syncSystem);
+			} else {
+				media.addListener(syncSystem);
+			}
+			window.__theme.__systemBound = true;
 		}
+		if (!window.__theme.__pageLoadBound) {
+			document.addEventListener("astro:page-load", initPage);
+			window.__theme.__pageLoadBound = true;
+		}
+		initPage();
 	})();
 </script>
 

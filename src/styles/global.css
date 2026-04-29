@@ -1,8 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=EB+Garamond:wght@400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
-@variant dark (&:where(.dark, .dark *));
 @import "./admonition.css";
 @import "katex/dist/katex.min.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 .katex-display {
 	overflow-x: auto;
@@ -72,6 +73,49 @@ html::-webkit-scrollbar {
 
 body {
 	overflow-x: hidden;
+}
+
+@keyframes view-fade-out {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes view-fade-in-up {
+	from {
+		opacity: 0;
+		transform: translateY(6px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	::view-transition-old(root) {
+		animation: view-fade-out 120ms ease both;
+	}
+
+	::view-transition-new(root) {
+		animation: view-fade-in-up 180ms cubic-bezier(0.22, 1, 0.36, 1) both;
+	}
+
+	::view-transition-group(*) {
+		animation-duration: 180ms;
+		animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	::view-transition-old(*),
+	::view-transition-new(*),
+	::view-transition-group(*) {
+		animation: none;
+	}
 }
 
 .prose .anchor {

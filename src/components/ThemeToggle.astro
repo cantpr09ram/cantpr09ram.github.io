@@ -17,38 +17,8 @@ import { Moon, Sun, TvMinimal } from "@lucide/astro";
 	</div>
 </div>
 
-<script is:inline>
+<script is:inline data-astro-rerun>
 	(() => {
-		const theme = window.__theme;
-		const button = document.querySelector(".theme-toggle-btn");
-		const icons = Array.from(document.querySelectorAll("[data-theme-icon]"));
-		if (!theme || !button || !icons.length) {
-			return;
-		}
-		const modes = ["light", "dark", "system"];
-
-		const updateUI = (mode) => {
-			for (const icon of icons) {
-				icon.hidden = icon.dataset.themeIcon !== mode;
-			}
-			const nextTheme = modes[(modes.indexOf(mode) + 1) % modes.length];
-			button.setAttribute("aria-label", `Theme: ${mode}. Click for ${nextTheme}.`);
-			button.title = `Theme: ${mode}`;
-		};
-
-		const select = (mode) => {
-			theme.set(mode);
-			updateUI(mode);
-		};
-
-		button.addEventListener("click", () => {
-			const current = theme.get();
-			const next = modes[(modes.indexOf(current) + 1) % modes.length];
-			select(next);
-		});
-
-		const initial = theme.get();
-		theme.apply(initial);
-		updateUI(initial);
+		window.__theme?.init?.();
 	})();
 </script>

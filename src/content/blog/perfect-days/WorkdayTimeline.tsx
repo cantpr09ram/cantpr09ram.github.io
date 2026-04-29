@@ -105,7 +105,7 @@ const PERIOD_META = {
 
 function timeToMinutes(time: string): number {
   const [h, m = "0"] = time.split(":")
-  return parseInt(h) * 60 + parseInt(m)
+  return parseInt(h, 10) * 60 + parseInt(m, 10)
 }
 
 const DAY_START = 0
@@ -128,15 +128,18 @@ function SlotBar({
 
   const wraps = end !== DAY_DURATION && end < start
   const segments = wraps
-    ? [{ left: (start / DAY_DURATION) * 100, width: ((DAY_DURATION - start) / DAY_DURATION) * 100 },
-       { left: 0, width: (end / DAY_DURATION) * 100 }]
-    : [{ left: (start / DAY_DURATION) * 100, width: ((end - start) / DAY_DURATION) * 100 }]
+    ? [
+        { id: `${slot.startTime}-${slot.endTime}-before-midnight`, left: (start / DAY_DURATION) * 100, width: ((DAY_DURATION - start) / DAY_DURATION) * 100 },
+        { id: `${slot.startTime}-${slot.endTime}-after-midnight`, left: 0, width: (end / DAY_DURATION) * 100 },
+      ]
+    : [{ id: `${slot.startTime}-${slot.endTime}`, left: (start / DAY_DURATION) * 100, width: ((end - start) / DAY_DURATION) * 100 }]
 
   return (
     <>
-      {segments.map((seg, i) => (
+      {segments.map((seg) => (
         <button
-          key={i}
+          key={seg.id}
+          type="button"
           onClick={onClick}
           aria-pressed={isActive}
           aria-label={`${slot.label}, ${slot.startTime} to ${slot.endTime}`}
@@ -184,7 +187,6 @@ export function WorkdayTimeline({
 
   return (
     <figure
-      role="figure"
       aria-label={`${title} timeline`}
       className="not-prose my-6 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 p-3 font-sans"
     >
@@ -196,14 +198,14 @@ export function WorkdayTimeline({
             <span className="text-xs text-neutral-400 dark:text-neutral-500 font-mono">{date}</span>
           )}
         </div>
-        <div className="flex items-center gap-3" aria-label="Period legend">
+        <ul className="flex items-center gap-3" aria-label="Period legend">
           {periods.map(({ period, meta }) => (
-            <div key={period} className="flex items-center gap-1">
+            <li key={period} className="flex items-center gap-1">
               <span className={`inline-block h-2 w-2 rounded-sm ${meta.barClass}`} aria-hidden="true" />
               <span className="text-[11px] text-neutral-500 dark:text-neutral-400">{meta.label}</span>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </figcaption>
 
       {/* Timeline bar */}
