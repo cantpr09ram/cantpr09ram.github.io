@@ -10,6 +10,8 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 const posts = (await getCollection("blog", ({ data }) => data.isdrift !== true)).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+const getPostTransitionName = (id: string) =>
+	`post-title-${id.replace(/[^a-zA-Z0-9_-]/g, "-")}`;
 ---
 
 <!doctype html>
@@ -31,7 +33,10 @@ const posts = (await getCollection("blog", ({ data }) => data.isdrift !== true))
 								href={`/blog/${post.id}/`}
 								class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 rounded-md px-1 py-0.5"
 							>
-								<p class="min-w-0 flex-1 text-lg font-semibold text-[var(--app-text-heading)]">
+								<p
+									class="min-w-0 flex-1 text-lg font-semibold text-[var(--app-text-heading)]"
+									transition:name={getPostTransitionName(post.id)}
+								>
 									{post.data.title}
 								</p>
 								<p class="shrink-0 text-xs text-[var(--app-text-muted)]">

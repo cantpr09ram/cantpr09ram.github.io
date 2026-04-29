@@ -3,7 +3,6 @@ import { getCollection } from "astro:content";
 import { Resvg } from "@resvg/resvg-js";
 import { createElement } from "react";
 import satori from "satori";
-import { SITE_TITLE } from "../../consts";
 import { loadFonts } from "../../lib/og-font";
 import { OgTemplate } from "../../lib/og-template";
 
@@ -23,7 +22,7 @@ export const GET: APIRoute = async ({ props }) => {
 	const fonts = await loadFonts();
 
 	const svg = await satori(
-		createElement(OgTemplate, { title, description, siteName: SITE_TITLE }),
+		createElement(OgTemplate, { title, description }),
 		{ width: 1200, height: 630, fonts },
 	);
 
