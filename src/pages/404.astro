@@ -1,7 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import EarthGlobe from "../components/EarthGlobe";
-import ThemeToggle from "../components/ThemeToggle.astro";
+import BaseBody from "../layouts/BaseBody.astro";
 
 const markers = [
 	{ id: "taiwan", label: "TAIWAN", location: [25.033, 121.5654], size: 0.03 },
@@ -10,7 +10,7 @@ const markers = [
 ];
 
 const globeConfig = {
-	rotationSpeed: 0.00,
+	rotationSpeed: 0.0,
 	mapBrightness: 5,
 	initialLocation: [23.6978, 120.9605] as [number, number],
 };
@@ -20,21 +20,22 @@ const globeConfig = {
 	<head>
 		<BaseHead title="404" description="Page not found" />
 	</head>
-	<body class="antialiased max-w-[var(--layout-main-max)] mx-4 mt-8 lg:mx-auto bg-[var(--app-bg)] text-[var(--app-text)]">
-		<ThemeToggle />
-		<main class="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
-			<section class="mx-auto flex min-h-[84vh] w-full max-w-3xl flex-col items-center justify-center text-center">
-				<EarthGlobe
-					client:load
-					markers={markers}
-					rotationSpeed={globeConfig.rotationSpeed}
-					mapBrightness={globeConfig.mapBrightness}
-					initialLocation={globeConfig.initialLocation}
-				/>
-				<p>Hello from <a class="text-[var(--app-text-muted)] hover:text-[var(--app-text)] hover:underline" href="https://en.wikipedia.org/wiki/Taiwan">Taiwan</a></p>
-				<a class="text-[var(--app-text-muted)] hover:text-[var(--app-text)] hover:underline" href="/">GO BACK</a>
+	<BaseBody
+		bodyClass="antialiased max-w-[var(--layout-main-max)] mx-4 mt-8 lg:mx-auto bg-[var(--app-bg)] text-[var(--app-text)]"
+		shellClass=""
+		mainClass="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0"
+	>
+		<section class="mx-auto flex min-h-[84vh] w-full max-w-3xl flex-col items-center justify-center text-center">
+			<EarthGlobe
+				client:load
+				markers={markers}
+				rotationSpeed={globeConfig.rotationSpeed}
+				mapBrightness={globeConfig.mapBrightness}
+				initialLocation={globeConfig.initialLocation}
+			/>
+			<p>Hello from <a class="text-[var(--app-text-muted)] hover:text-[var(--app-text)] hover:underline" href="https://en.wikipedia.org/wiki/Taiwan">Taiwan</a></p>
+			<a class="text-[var(--app-text-muted)] hover:text-[var(--app-text)] hover:underline" href="/">GO BACK</a>
 
-			</section>
-		</main>
-	</body>
+		</section>
+	</BaseBody>
 </html>

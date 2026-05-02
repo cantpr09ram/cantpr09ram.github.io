@@ -1,15 +1,15 @@
 ---
 import { getCollection } from "astro:content";
 import BaseHead from "../../components/BaseHead.astro";
-import Footer from "../../components/Footer.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
-import Header from "../../components/Header.astro";
-import ThemeToggle from "../../components/ThemeToggle.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+import BaseBody from "../../layouts/BaseBody.astro";
+import { getAllSeries } from "../../lib/series";
 
-const posts = (await getCollection("blog", ({ data }) => data.isdrift !== true)).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const posts = (
+	await getCollection("blog", ({ data }) => data.isdrift !== true)
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const series = getAllSeries(posts);
 const getPostTransitionName = (id: string) =>
 	`post-title-${id.replace(/[^a-zA-Z0-9_-]/g, "-")}`;
 ---
@@ -19,37 +19,110 @@ const getPostTransitionName = (id: string) =>
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
-	<body class="antialiased tracking-tight font-sans">
-    <ThemeToggle />
-    <div class="min-h-screen flex flex-col pt-10 md:pt-8 p-8 bg-[var(--app-bg)] text-[var(--app-text)]">
-      <main class="max-w-[var(--layout-main-max)] mx-auto w-full flex flex-col flex-1">
-			<Header />
+	<BaseBody showHeader showFooter>
 			<section class="pl-2 py-5">
-				<ul class="space-y-1">
+				{
+					series.map((item) => (
+						<h1
+							class="mb-4 text-2xl font-semibold text-[var(--app-text-heading)]"
+							data-series-title={item.slug}
+							hidden
+						>
+							{item.title}
+						</h1>
+					))
+				}
+				<ul class="space-y-1" data-post-list="all">
 					{
 					posts.map((post) => (
-						<li>
-							<a
-								href={`/blog/${post.id}/`}
-								class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 rounded-md px-1 py-0.5"
-							>
-								<p
-									class="min-w-0 flex-1 text-lg font-semibold text-[var(--app-text-heading)]"
-									transition:name={getPostTransitionName(post.id)}
-								>
-									{post.data.title}
-								</p>
+						<li data-series-slug={post.data.series?.slug ?? ""}>
+							<div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 rounded-md px-1 py-0.5">
+								<div class="min-w-0 flex-1 text-lg font-semibold text-[var(--app-text-heading)]">
+									<a
+										href={`/blog/${post.id}/`}
+										class="underline-offset-4 hover:underline"
+										transition:name={getPostTransitionName(post.id)}
+									>
+										{post.data.title}
+									</a>
+								</div>
 								<p class="shrink-0 text-xs text-[var(--app-text-muted)]">
 									<FormattedDate date={post.data.pubDate} />
 								</p>
-							</a>
+							</div>
 						</li>
 					))
 					}
 				</ul>
+				{
+					series.map((item) => (
+						<ul
+							class="space-y-1"
+							data-post-list={item.slug}
+							hidden
+						>
+							{item.posts.map((post) => (
+								<li>
+									<div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 rounded-md px-1 py-0.5">
+										<div class="min-w-0 flex-1 text-lg font-semibold text-[var(--app-text-heading)]">
+											<a
+												href={`/blog/${post.id}/`}
+												class="underline-offset-4 hover:underline"
+											>
+												{post.data.title}
+											</a>
+										</div>
+										<p class="shrink-0 text-xs text-[var(--app-text-muted)]">
+											<FormattedDate date={post.data.pubDate} />
+										</p>
+									</div>
+								</li>
+							))}
+						</ul>
+					))
+				}
+				<p class="text-sm text-[var(--app-text-muted)]" data-empty-series hidden>
+					No posts in this series.
+				</p>
 			</section>
-			<Footer />
-		</main>
-	</div>
-	</body>
+	<script is:inline>
+		const applySeriesFilter = () => {
+			const params = new URLSearchParams(window.location.search);
+			const selectedSeries = params.get("series") || "all";
+			const lists = Array.from(document.querySelectorAll("[data-post-list]"));
+			const filters = Array.from(document.querySelectorAll("[data-series-filter]"));
+			const titles = Array.from(document.querySelectorAll("[data-series-title]"));
+			const emptyState = document.querySelector("[data-empty-series]");
+			let hasVisibleList = false;
+
+			for (const list of lists) {
+				const isVisible = list.dataset.postList === selectedSeries;
+				list.hidden = !isVisible;
+				hasVisibleList ||= isVisible;
+			}
+
+			for (const filter of filters) {
+				const isActive = filter.dataset.seriesFilter === selectedSeries;
+				if (isActive) {
+					filter.setAttribute("aria-current", "page");
+				} else {
+					filter.removeAttribute("aria-current");
+				}
+				filter.classList.toggle("text-[var(--app-text)]", isActive);
+				filter.classList.toggle("font-medium", isActive);
+			}
+
+			for (const title of titles) {
+				title.hidden = title.dataset.seriesTitle !== selectedSeries;
+			}
+
+			if (emptyState) {
+				emptyState.hidden = hasVisibleList;
+			}
+		};
+
+		document.addEventListener("astro:page-load", applySeriesFilter);
+		applySeriesFilter();
+	</script>
+	</BaseBody>
 </html>
