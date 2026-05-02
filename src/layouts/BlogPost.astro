@@ -1,13 +1,16 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
-import Header from "../components/Header.astro";
-import ThemeToggle from "../components/ThemeToggle.astro";
+import BaseBody from "./BaseBody.astro";
+import type { SeriesContext } from "../lib/series";
 
-type Props = CollectionEntry<"blog">["data"] & { slug: string };
-const { title, description, pubDate, updatedDate, slug } = Astro.props;
+type Props = CollectionEntry<"blog">["data"] & {
+	slug: string;
+	seriesContext?: SeriesContext;
+};
+const { title, description, pubDate, updatedDate, slug, seriesContext } =
+	Astro.props;
 const titleTransitionName = `post-title-${slug.replace(/[^a-zA-Z0-9_-]/g, "-")}`;
 ---
 
@@ -17,11 +20,7 @@ const titleTransitionName = `post-title-${slug.replace(/[^a-zA-Z0-9_-]/g, "-")}`
     <BaseHead title={title} description={description} image={`/og/${slug}.png`} />
   </head>
 
-  <body class="antialiased tracking-tight font-sans">
-    <ThemeToggle />
-    <div class="min-h-screen flex flex-col pt-10 md:pt-8 p-8 bg-[var(--app-bg)] text-[var(--app-text)]">
-      <main class="max-w-[var(--layout-main-max)] mx-auto w-full flex flex-col flex-1">
-        <Header />
+  <BaseBody showHeader showFooter>
         <article>
           <div class="mx-auto w-full max-w-[var(--layout-article-max)] px-1 md:px-3 text-[var(--app-text-soft)] py-5">
             <div class="mb-4 py-2 text-left leading-none">
@@ -32,6 +31,18 @@ const titleTransitionName = `post-title-${slug.replace(/[^a-zA-Z0-9_-]/g, "-")}`
                 {title}
               </h1>
               <p class="mb-2 text-[var(--app-text-muted)]">{description}</p>
+              {
+                seriesContext && (
+                  <p class="mb-2 text-sm text-[var(--app-text-muted)]">
+                    <a
+                      href={`/blog/?series=${seriesContext.series.slug}`}
+                      class="font-medium text-[var(--app-text)] underline-offset-4 hover:underline"
+                    >
+                      {seriesContext.series.title}
+                    </a>
+                  </p>
+                )
+              }
               <div class="mb-2 text-xs text-[var(--app-text-muted)]">
                 <FormattedDate date={pubDate} />
                 {
@@ -49,8 +60,5 @@ const titleTransitionName = `post-title-${slug.replace(/[^a-zA-Z0-9_-]/g, "-")}`
             </div>
           </div>
         </article>
-      <Footer />
-      </main>
-    </div>
-  </body>
+  </BaseBody>
 </html>

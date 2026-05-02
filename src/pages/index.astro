@@ -1,7 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import ThemeToggle from "../components/ThemeToggle.astro";
-import { SITE_DESCRIPTION, SITE_TITLE , GITHUB, EMAIL} from "../consts";
+import BaseBody from "../layouts/BaseBody.astro";
+import { SITE_DESCRIPTION, SITE_TITLE, GITHUB, EMAIL } from "../consts";
 ---
 
 <!doctype html>
@@ -9,29 +9,26 @@ import { SITE_DESCRIPTION, SITE_TITLE , GITHUB, EMAIL} from "../consts";
     <head>
         <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
     </head>
-    <body class="antialiased tracking-tight">
-        <ThemeToggle />
-		<div
-			class="min-h-dvh flex flex-col pt-8 pb-6 px-2 md:px-8 md:pt-8 md:pb-8 bg-[var(--app-bg)] text-[var(--app-text)]"
-		>
-			<main class="flex-1 max-w-[var(--layout-main-max)] mx-auto w-full flex flex-col justify-center -mt-6 md:-mt-10">
-				<div class="text-2xl pl-3 pb-2 space-y-4">
-                    <h1>
-                        Hi, I’m cantpr09ram — designed by probability, assembled in <a class="text-[var(--app-text-muted)] hover:text-[var(--app-text)] hover:underline" href="/404">Taiwan</a>.
-                    </h1>
-					<h1>
-						A student by day, a <a class="text-[var(--app-text-muted)] hover:text-[var(--app-text)] hover:underline" href="https://run.cantpr09ram.cc">runner</a> in the mornings and evenings, and a craftsman in free time.
-					</h1>
-					<h1>
-						Feel free to read my 
-						<a class="text-[var(--app-text-muted)] hover:text-[var(--app-text)] hover:underline" href="/blog">writing</a>
-						, explore my 
-						<a class="text-[var(--app-text-muted)] hover:text-[var(--app-text)] hover:underline" rel="noopener noreferrer" href={`https://github.com/${GITHUB}`}>projects</a>
-						, or say <a class="text-[var(--app-text-muted)] hover:text-[var(--app-text)] hover:underline" rel="noopener noreferrer" href={`mailto:${EMAIL}`}>hello</a>.
-					</h1>
-                </div>
-            </main>
-        </div>
-    </body>
+    <BaseBody
+      bodyClass="antialiased tracking-tight"
+      shellClass="min-h-dvh flex flex-col pt-8 pb-6 px-2 md:px-8 md:pt-8 md:pb-8 bg-[var(--app-bg)] text-[var(--app-text)]"
+      mainClass="flex-1 max-w-[var(--layout-main-max)] mx-auto w-full flex flex-col justify-center -mt-6 md:-mt-10"
+    >
+      <div class="text-2xl pl-3 pb-2 space-y-4">
+        <h1>
+          Hi, I’m cantpr09ram — designed by probability, assembled in <a class="text-[var(--app-text-muted)] hover:text-[var(--app-text)] hover:underline" href="/404">Taiwan</a>.
+        </h1>
+        <h1>
+          A student by day, a <a class="text-[var(--app-text-muted)] hover:text-[var(--app-text)] hover:underline" href="https://run.cantpr09ram.cc">runner</a> in the mornings and evenings, and a craftsman in free time.
+        </h1>
+        <h1>
+          Feel free to read my
+          <a class="text-[var(--app-text-muted)] hover:text-[var(--app-text)] hover:underline" href="/blog">writing</a>
+          , explore my
+          <a class="text-[var(--app-text-muted)] hover:text-[var(--app-text)] hover:underline" rel="noopener noreferrer" href={`https://github.com/${GITHUB}`}>projects</a>
+          , or say <a class="text-[var(--app-text-muted)] hover:text-[var(--app-text)] hover:underline" rel="noopener noreferrer" href={`mailto:${EMAIL}`}>hello</a>.
+        </h1>
+      </div>
+    </BaseBody>
 </html>
  
