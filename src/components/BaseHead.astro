@@ -108,11 +108,7 @@ const ogImageUrl =
 			}
 		};
 		if (!window.__theme.__systemBound) {
-			if (typeof media.addEventListener === "function") {
-				media.addEventListener("change", syncSystem);
-			} else {
-				media.addListener(syncSystem);
-			}
+			media.addEventListener("change", syncSystem);
 			window.__theme.__systemBound = true;
 		}
 		if (!window.__theme.__pageLoadBound) {

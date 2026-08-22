@@ -14,7 +14,10 @@ async function loadLocalFallbackFont(): Promise<ArrayBuffer> {
 	for (const path of LOCAL_FALLBACK_FONT_CANDIDATES) {
 		try {
 			const data = await readFile(path);
-			return data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength);
+			return data.buffer.slice(
+				data.byteOffset,
+				data.byteOffset + data.byteLength,
+			);
 		} catch {
 			// Try next candidate.
 		}
@@ -30,14 +33,19 @@ async function fetchFont(family: string, weight: number): Promise<ArrayBuffer> {
 		headers: { "User-Agent": "Mozilla/5.0 (compatible; OGImageGen)" },
 	});
 	if (!cssResponse.ok) {
-		throw new Error(`Failed to load font stylesheet for ${family} ${weight}: ${cssResponse.status}`);
+		throw new Error(
+			`Failed to load font stylesheet for ${family} ${weight}: ${cssResponse.status}`,
+		);
 	}
 	const css = await cssResponse.text();
 	const match = css.match(/src: url\((.+?)\) format\('(opentype|truetype)'\)/);
-	if (!match) throw new Error(`Could not parse font URL for ${family} ${weight}`);
+	if (!match)
+		throw new Error(`Could not parse font URL for ${family} ${weight}`);
 	const fontResponse = await fetch(match[1]);
 	if (!fontResponse.ok) {
-		throw new Error(`Failed to download font binary for ${family} ${weight}: ${fontResponse.status}`);
+		throw new Error(
+			`Failed to download font binary for ${family} ${weight}: ${fontResponse.status}`,
+		);
 	}
 	return fontResponse.arrayBuffer();
 }
@@ -57,7 +65,10 @@ export async function loadFonts(): Promise<Font[]> {
 		];
 	} catch (error) {
 		// Keep OG generation working in offline/CI environments where google fonts are blocked.
-		console.warn("Failed to fetch remote OG fonts. Falling back to a local system font.", error);
+		console.warn(
+			"Failed to fetch remote OG fonts. Falling back to a local system font.",
+			error,
+		);
 		const fallback = await loadLocalFallbackFont();
 		cache = [
 			{ name: "TASA Explorer", data: fallback, weight: 400, style: "normal" },

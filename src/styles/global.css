@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Iansui&family=JetBrains+Mono:wght@400;500;700&family=TASA+Explorer:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
-@import "./admonition.css";
+@import "rehype-callouts/theme/github";
 @import "katex/dist/katex.min.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -164,12 +164,6 @@ pre::-webkit-scrollbar {
 	border-color: var(--code-border);
 }
 
-html.dark .prose pre.astro-code,
-html.dark .prose pre.astro-code span {
-	color: var(--shiki-dark) !important;
-	background-color: var(--shiki-dark-bg) !important;
-}
-
 code {
 	font-family: var(--font-mono);
 	font-size: 14px;
@@ -213,8 +207,10 @@ code:not(pre code) span {
 	}
 }
 
-pre code span {
-	font-weight: 500;
+html.dark .prose pre.astro-code,
+html.dark .prose pre.astro-code span {
+	color: var(--shiki-dark) !important;
+	background-color: var(--shiki-dark-bg) !important;
 }
 
 .prose img {
