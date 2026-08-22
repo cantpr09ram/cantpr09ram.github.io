@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Read pnpm version from package.json
         id: pm
@@ -34,11 +34,12 @@ jobs:
           echo "packageManager=$PM" >> "$GITHUB_OUTPUT"
 
       - name: Install, build, and upload your site
-        uses: withastro/action@v3
+        uses: withastro/action@v6
         with:
           path: .
-          node-version: 22
+          node-version: 26
           package-manager: ${{ steps.pm.outputs.packageManager }}
+          build-cmd: pnpm run ci
 
   deploy:
     needs: build
@@ -50,4 +51,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

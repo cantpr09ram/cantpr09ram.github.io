@@ -36,7 +36,10 @@ const markerLabelStyle: CSSProperties = {
 
 const DEFAULT_INITIAL_LOCATION: [number, number] = [23.6978, 120.9605];
 
-function locationToAngles(location: [number, number]): { phi: number; theta: number } {
+function locationToAngles(location: [number, number]): {
+	phi: number;
+	theta: number;
+} {
 	const [lat, lon] = location;
 	if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
 		return { phi: 0, theta: 0.28 };
@@ -135,7 +138,8 @@ export default function EarthGlobe({
 				`[style*="anchor-name:--cobe-${id}"], [style*="anchor-name: --cobe-${id}"]`,
 			);
 
-		const { phi: initialPhi, theta: initialTheta } = locationToAngles(initialLocation);
+		const { phi: initialPhi, theta: initialTheta } =
+			locationToAngles(initialLocation);
 		let phi = initialPhi;
 		let theta = initialTheta;
 		let globe: ReturnType<typeof createGlobe> | undefined;
@@ -285,7 +289,10 @@ export default function EarthGlobe({
 		canvas.addEventListener("pointercancel", onPointerUp);
 		canvas.addEventListener("pointerleave", onPointerUp);
 		window.addEventListener("resize", onResize);
-		themeObserver.observe(root, { attributes: true, attributeFilter: ["class"] });
+		themeObserver.observe(root, {
+			attributes: true,
+			attributeFilter: ["class"],
+		});
 
 		return () => {
 			cancelAnimationFrame(resizeFrame);
@@ -308,7 +315,8 @@ export default function EarthGlobe({
 				id={canvasId}
 				ref={canvasRef}
 				className="block h-full w-full touch-none cursor-grab active:cursor-grabbing"
-				aria-hidden="true"
+				role="img"
+				aria-label="Interactive globe showing map markers"
 			/>
 			<div
 				ref={labelLayerRef}

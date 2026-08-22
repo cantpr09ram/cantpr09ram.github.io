@@ -18,13 +18,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const GET: APIRoute = async ({ props }) => {
-	const { title, description } = props as { title: string; description: string };
+	const { title, description } = props as {
+		title: string;
+		description: string;
+	};
 	const fonts = await loadFonts();
 
-	const svg = await satori(
-		createElement(OgTemplate, { title, description }),
-		{ width: 1200, height: 630, fonts },
-	);
+	const svg = await satori(createElement(OgTemplate, { title, description }), {
+		width: 1200,
+		height: 630,
+		fonts,
+	});
 
 	const png = new Resvg(svg, { font: { loadSystemFonts: false } })
 		.render()

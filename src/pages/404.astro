@@ -1,9 +1,9 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
-import EarthGlobe from "../components/EarthGlobe";
+import EarthGlobe, { type GlobeMarker } from "../components/EarthGlobe";
 import BaseBody from "../layouts/BaseBody.astro";
 
-const markers = [
+const markers: GlobeMarker[] = [
 	{ id: "taiwan", label: "TAIWAN", location: [25.033, 121.5654], size: 0.03 },
 	//{ id: "nyc", label: "New York", location: [40.7128, -74.006], size: 0.03 },
 	//{ id: "london", label: "London", location: [51.5072, -0.1276], size: 0.03 },
