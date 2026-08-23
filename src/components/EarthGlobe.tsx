@@ -61,7 +61,7 @@ function locationToAngles(location: [number, number]): {
 export default function EarthGlobe({
 	canvasId = "earth-globe",
 	sizeClass = "aspect-square w-[78vw] max-w-[420px] sm:w-[72vw]",
-	rotationSpeed = 0.01,
+	rotationSpeed = -0.01,
 	mapBrightness = 6,
 	dark,
 	initialLocation = DEFAULT_INITIAL_LOCATION,
